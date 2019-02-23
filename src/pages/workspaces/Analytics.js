@@ -18,7 +18,7 @@ export default class Analytics extends Component {
   render() {
 		return (
 			<div className="row no-gutters h-100">
-				<div className="col-md-9 col-sm-12 border-right position-relative">
+				<div className="col-lg-9 col-md-8 col-sm-12 border-right position-relative">
 					<div className="p-md-3 p-sm-1">
 						<h1 className="h3 font-600 text-curious-blue mb-3">Targeting and analytics</h1>
 						<p className="mb-2">Import from notification inbox</p>
@@ -28,7 +28,7 @@ export default class Analytics extends Component {
 						<p className="mb-3">Connect with frameworks </p>
 					</div>
 				</div>
-				<div className="col-md-3 col-sm-12 position-relative">
+				<div className="col-lg-3 col-md-4 col-sm-12 position-relative">
 					<div className="p-md-3 p-sm-1">
 						<h1 className="h3 font-600 text-curious-blue mb-3">Side content</h1>
 						<p className="mb-2">You can receive messages about activities in your projects and channels, as well as from related in real time.</p>

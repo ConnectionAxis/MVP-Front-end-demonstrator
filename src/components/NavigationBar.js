@@ -64,13 +64,13 @@ class NavigationBar extends Component {
 		return (
 			<nav className="conax-nav --top">
 				<div className="container py-2 px-0">
-					<div className="row no-gutters align-items-center">
-						<div className="col-md-1 col-2">
-							<div className="pl-md-3 pl-sm-1">
-								<ConAxLogo type="logo" width="46" cursor="pointer" onClick={(e) => this.handleMenu(e, "default")}/>
+					<div className="d-flex no-gutters align-items-center px-3">
+						<div className="">
+							<div className="mr-2">
+								<ConAxLogo type="logo" width="42" cursor="pointer" onClick={(e) => this.handleMenu(e, "default")}/>
 							</div>
 						</div>
-						<div className="col-md-4 col-8">
+						<div className="flex-fill">
 							<div className="form-group mb-0">
 								<input
 									id="conax-search-input"
@@ -79,16 +79,21 @@ class NavigationBar extends Component {
 									className="form-control" />
 							</div>
 						</div>
-						<div className="col-md-7 text-right">
-							<CNavButton type="text" text="Create new Project" onClick={(e) => this.handleAction(e, "new-project")} className="ml-1"/>
-							<CNavButton type="text" text="Create new Channel" onClick={(e) => this.handleAction(e, "new-channel")} className="ml-1"/>
-							<CNavButton type="user" text={this.state.user.name} onClick={(e) => this.handleAction(e, "user")} className="ml-1"/>
+						<div className="flex-fill text-right" style={{ "min-width": "100px" }}>
+							<CNavButton type="text" text="Create new Project" onClick={(e) => this.handleAction(e, "new-project")} className="ml-1 d-lg-inline-block d-none"/>
+							<CNavButton type="text" text="Create new Channel" onClick={(e) => this.handleAction(e, "new-channel")} className="ml-1 d-lg-inline-block d-none"/>
+							<CNavButton type="user" text={this.state.user.name} onClick={(e) => this.handleAction(e, "user")} className="ml-1 d-sm-inline-block d-none"/>
 							<CNavButton type="circle" icon="bell" onClick={(e) => this.handleAction(e, "notification")} className="ml-1" counter={this.state.counter}/>
 							<Dropdown className="conax-nav-dropdown">
 								<Dropdown.Toggle variant="success" id="dropdown-basic">
 									<CNavButton type="circle" icon="dots" className="ml-2" button={false}/>
 								</Dropdown.Toggle>
 								<Dropdown.Menu alignRight className="mt-3">
+									<Dropdown.Item className="font-600 py-2 d-block d-md-none" href="#new-project" onClick={(e) => this.handleAction(e, "user")}>{this.state.user.name}</Dropdown.Item>
+									<Dropdown.Divider className="d-block d-md-none" />
+									<Dropdown.Item className="font-600 py-2 text-curious-blue d-block d-lg-none" href="#new-project" onClick={(e) => this.handleAction(e, "new-project")}>Create new Project</Dropdown.Item>
+									<Dropdown.Item className="font-600 py-2 text-curious-blue d-block d-lg-none" href="#new-channel" onClick={(e) => this.handleAction(e, "new-channel")}>Create new Channel</Dropdown.Item>
+									<Dropdown.Divider className="d-block d-lg-none" />
 									<Dropdown.Item className="font-600 py-2" href="#settings" onClick={(e) => this.handleMenu(e, "settings")}>ConAx Settings</Dropdown.Item>
 									<Dropdown.Item className="font-600 py-2" href="#networks" onClick={(e) => this.handleMenu(e, "networks")}>Creative Networks</Dropdown.Item>
 									<Dropdown.Item className="font-600 py-2" href="#analytics" onClick={(e) => this.handleMenu(e, "analytics")}>Targeting and analytics</Dropdown.Item>

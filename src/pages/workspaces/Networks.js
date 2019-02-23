@@ -18,8 +18,8 @@ export default class Networks extends Component {
   render() {
 		return (
 			<div className="row no-gutters h-100">
-				<div className="col-md-9 col-sm-12 border-right position-relative">
-					<div className="p-md-3 p-sm-1">
+				<div className="col-lg-9 col-md-8 col-sm-12 border-right position-relative">
+					<div className="p-3">
 						<h1 className="h3 font-600 text-curious-blue mb-3">Creative Networks</h1>
 						<p className="mb-2">Creative Networks will integrate related frameworks and structure your activities to the research data stack.</p>
 						<h3 className="h5 font-600 mb-3">Networking on ConAx</h3>
@@ -41,8 +41,8 @@ export default class Networks extends Component {
 						</ul>
 					</div>
 				</div>
-				<div className="col-md-3 col-sm-12 position-relative">
-					<div className="p-md-3 p-sm-1">
+				<div className="col-lg-3 col-md-4 col-sm-12 position-relative">
+					<div className="p-3">
 						<h1 className="h3 font-600 text-curious-blue mb-3">Open Source</h1>
 						<p className="mb-2">When creating a channel or project on ConAx using the Quick Access function, you can set third-connections control to your channels or projects.</p>
 					</div>

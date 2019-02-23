@@ -134,8 +134,8 @@ body {
 
 .text-white { color: var(--white); }
 .text-silver { color: var(--silver); }
-.text-curious-blue { color: var(--curious-blue); }
-.text-conax-blue { color: var(--conax-blue); }
+.text-curious-blue { color: var(--curious-blue) !important; }
+.text-conax-blue { color: var(--conax-blue) !important; }
 
 .text-sm-center { text-align: center; }
 .text-sm-right { text-align: right; }

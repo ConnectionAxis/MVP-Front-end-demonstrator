@@ -75,7 +75,7 @@ class WorkSpace extends Component {
 					switchPage={this.switchPage}
 					openModal={this.openModal} />
 				<div className="workspace --with-nav d-flex">
-					<div className="container px-md-0">
+					<div className="container px-0">
 						{this.switchWorkspace()}
 					</div>
 				</div>

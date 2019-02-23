@@ -23,7 +23,7 @@ class Settings extends Component {
   render() {
 		return (
 			<div className="row no-gutters h-100">
-				<div className="col-md-2 col-2 border-right">
+				<div className="col-lg-2 col-md-3 col-sm-12 border-right">
 					<ul className="c-tab-nav --column nav flex-column mt-3">
 						<a className={"nav-link font-600 " + (this.state.active === "account" ? "active" : "")} href="#account" onClick={(e) => this.switchSettings(e, "account")}>Account settings</a>
 						<a className={"nav-link font-600 " + (this.state.active === "profile" ? "active" : "")} href="#profile" onClick={(e) => this.switchSettings(e, "profile")}>Edit Profile</a>
@@ -31,7 +31,7 @@ class Settings extends Component {
 						<a className={"nav-link font-600 " + (this.state.active === "notification" ? "active" : "")} href="#notification" onClick={(e) => this.switchSettings(e, "notification")}>Notification inbox</a>
 					</ul>
 				</div>
-				<div className="col-md-7 col-2 border-right pt-3 px-3">
+				<div className="col-lg-7 col-md-6 col-sm-12 border-right pt-3 px-3">
 					{this.state.active === "account" &&
 						<>
 							<h1 className="h3 font-600 text-curious-blue mb-3">Account settings</h1>
@@ -66,7 +66,7 @@ class Settings extends Component {
 						</>
 					}
 				</div>
-				<div className="col-md-3 col-2"></div>
+				<div className="col-lg-3 col-md-3 col-sm-12"></div>
 			</div>
 		);
 	}
