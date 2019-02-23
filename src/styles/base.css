@@ -25,6 +25,11 @@
 
   --c-btn-lg-padding-y: 1rem;
   --c-btn-lg-padding-x: 0.9rem;
+
+  --white-rgba: 255, 255, 255;
+  --black-rgba: 0, 0, 0;
+
+  --navbar-height: 60px;
 }
 
 html {
@@ -47,21 +52,36 @@ body {
 .bg-gallery { background-color: var(--gallery); }
 .bg-air { background-color: var(--air); }
 .bg-gray-1 { background-color: var(--gray-1); }
+.bg-curious-blue { background-color: var(--curious-blue); }
 
 @media (min-height: 600px), (min-width: 768px) {
   .screen,
-  .screen > .container {
+  .screen > .container,
+  .workspace,
+  .workspace > .container {
     min-height: 100vh;
+  }
+  .workspace.--with-nav,
+  .workspace.--with-nav > .container {
+  	min-height: calc(100vh - var(--navbar-height));
   }
 }
 
-.screen {
+.screen,
+.workspace {
   position: relative;
+}
+
+.workspace {
+	top: var(--navbar-height);
 }
 
 /* Brand logo styles */
 .conax-logo svg {
 	fill: var(--conax-blue);
+}
+.conax-logo.--white svg {
+	fill: var(--white);
 }
 
 @media (min-width: 768px) {
@@ -213,7 +233,7 @@ svg.social-icon {
   border-radius: 2rem;
 }
 
-.c-btn.c-btn-animated {
+.c-btn-animated {
   transition:         0.08s ease-in;
   -o-transition:      0.08s ease-in;
   -ms-transition:     0.08s ease-in;
@@ -240,7 +260,176 @@ a.c-btn:hover {
   color: var(--white);
 }
 
+.c-link { cursor: pointer; }
+
 a.c-link:hover {
 	text-decoration: none;
 	color: var(--curious-blue);
+}
+
+/* Util styles */
+.c-loading--fade {
+	animation: loading--fade infinite 2s linear;
+}
+
+@keyframes loading--fade {
+	0% { opacity: 0.4; }
+	30% { opacity: 1; }
+	70% { opacity: 1; }
+	100% { opacity: 0.4; }
+}
+
+/* Navigation bar styles */
+.conax-nav {
+	background-color: var(--white);
+}
+
+.conax-nav.--top {
+	border-bottom: 1px solid var(--alto);
+	position: fixed;
+	width: 100%;
+	top: 0;
+	left: 0;
+	z-index: 1;
+}
+
+.c-nav-btn {
+	background: inherit;
+	border: 1px solid var(--white);
+	cursor: pointer;
+	outline: none !important;
+	height: calc(2.5rem + 2px);
+	border-radius: calc(2.5rem + 2px);
+}
+
+div.c-nav-btn {
+	line-height: calc(2.5rem - 2px);
+}
+
+.c-nav-btn:hover {
+	background-color: var(--curious-blue);
+}
+
+.c-nav-btn:active {
+	background-color: inherit;
+	border: 1px solid var(--curious-blue);
+	color: var(--curious-blue);
+}
+
+.c-nav-btn.--circle {
+	width: calc(2.5rem + 2px);
+}
+
+.c-user-icon {
+	background-color: var(--curious-blue);
+	color: var(--white);
+	display: inline-block;
+	border-radius: 2rem;
+	width: 1.5rem;
+	height: 1.5rem;
+	line-height: 1.6rem;
+	text-transform: uppercase;
+	margin-right: 0.3rem;
+	margin-left: -0.25rem;
+}
+
+.c-nav-btn.--text,
+.c-nav-btn.--user {
+	padding-right: 0.85rem;
+	padding-left: 0.85rem;
+	font-weight: 800;
+}
+.c-nav-btn.--text { color: var(--curious-blue); }
+.c-nav-btn.--user { color: var(--rolling-stone); }
+
+.c-nav-btn svg { fill: var(--alto-2); }
+
+.c-nav-btn:hover svg { fill: var(--white); }
+.c-nav-btn:active svg { fill: var(--curious-blue); }
+
+.c-nav-btn:hover .c-user-icon { background-color: var(--white); color: var(--curious-blue); }
+.c-nav-btn:active .c-user-icon { background-color: var(--curious-blue); color: var(--white); }
+
+.c-nav-btn.--text:hover,
+.c-nav-btn.--user:hover { color: var(--white); }
+.c-nav-btn.--text:active,
+.c-nav-btn.--user:active { color: var(--curious-blue); }
+
+.c-nav-btn-counter {
+	position: relative;
+}
+
+.c-counter {
+	background-color: var(--red);
+	color: var(--white);
+	font-size: 0.65rem;
+	text-align: center;
+	line-height: 1.1rem;
+	min-width: 1.1rem;
+	height: 1.1rem;
+	border-radius: 1rem;
+	position: absolute;
+	right: 0;
+	top: 0;
+}
+
+.conax-nav-dropdown {
+	display: inline-block;
+}
+
+.conax-nav-dropdown .dropdown-toggle {
+	box-shadow: none !important;
+	outline: none !important;
+	background: transparent !important;
+	border: none !important;
+	padding: 0;
+}
+
+.conax-nav-dropdown .dropdown-toggle::after { display: none !important; }
+
+.conax-nav-dropdown .dropdown-item:not(:active) {
+	color: var(--gray-dark);
+}
+
+/* Tabs navigations */
+.c-tab-nav.--column .nav-link {
+	color: var(--gray-dark);
+}
+.c-tab-nav.--column .nav-link:hover {
+	background-color: var(--light);
+}
+.c-tab-nav.--column .nav-link.active {
+	color: var(--curious-blue);
+	background-color: inherit;
+}
+
+/* Loading Mask styles */
+.c-loading-mask {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(var(--white-rgba), 0.5);
+}
+
+.c-loading-mask .c-loading-icon {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	width: 5rem;
+	height: 5rem;
+	margin-top: -2.5rem;
+	margin-left: -2.5rem;
+	fill: var(--curious-blue);
+  animation: c-loading-icon-spin infinite 5s linear;
+}
+
+@keyframes c-loading-icon-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }

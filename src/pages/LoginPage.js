@@ -9,11 +9,16 @@ class LoginPage extends Component {
 		super(props);
 
 		this.showSignUp = this.showSignUp.bind(this);
+		this.userLogin = this.userLogin.bind(this);
 	}
 
 	showSignUp(e) {
 		e.preventDefault();
 		this._modal.show();
+	}
+
+	userLogin(user) {
+		this.props.handleUser("login");
 	}
 
 	render() {
@@ -35,7 +40,8 @@ class LoginPage extends Component {
 							</div>
 						</div>
 						<div className="mb-4">
-							<SignInForm />
+							<SignInForm
+								userLogin={this.userLogin} />
 							<div className="form-group text-center">
 								<a href="#sign-up" className="c-link font-600 text-curious-blue" onClick={this.showSignUp}>Sign Up</a>
 							</div>

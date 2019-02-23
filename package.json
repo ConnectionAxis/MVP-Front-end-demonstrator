@@ -4,10 +4,11 @@
   "private": true,
   "dependencies": {
     "bootstrap": "^4.3.1",
+    "firebase": "^5.8.3",
     "js-md5": "^0.7.3",
     "react": "^16.8.1",
     "react-bootstrap": "^1.0.0-beta.5",
-    "react-cookie": "^3.0.8",
+    "react-cookies": "^0.1.0",
     "react-dom": "^16.8.1",
     "react-scripts": "2.1.5",
     "string-format": "^2.0.0"
@@ -21,11 +22,12 @@
   "eslintConfig": {
     "extends": "react-app"
   },
-  "homepage": "https://popovich.000webhostapp.com/conax-tool",
   "browserslist": [
     ">0.2%",
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "homepage": "https://popovich.000webhostapp.com/conax-tool",
+  "devDependencies": {}
 }

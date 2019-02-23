@@ -1,15 +1,22 @@
 import React, { Component } from 'react';
+import format from 'string-format';
 
 /*
- * Base usage: <ConAxLogo type="large" width="150" />
+ * Base usage: <ConAxLogo type="large" width="150" color="#fff" cursor="pointer" />
  */
 
 class ConAxLogo extends Component {
 	constructor(props) {
 		super(props);
 
+		this.cls = 'conax-logo ';
+
+		if( props.className )
+			this.cls += format('{0} ', props.className);
+
 		this.elStyle = {
-			width: (this.props.width) ? this.props.width + 'px' : 'auto'
+			width: (this.props.width) ? this.props.width + 'px' : 'auto',
+			cursor: (this.props.cursor) ? this.props.cursor : 'default'
 		}
 	}
 
@@ -70,8 +77,13 @@ class ConAxLogo extends Component {
 	}
 
 	render() {
+		const { onClick } = this.props;
+
 		return(
-			<div className='conax-logo' style={this.elStyle}>
+			<div
+				className={this.cls +((this.props.color) ? "--"+this.props.color : "")}
+				onClick={onClick}
+				style={this.elStyle}>
 				{this.renderConaxLogo(this.props)}
 			</div>
 		);
