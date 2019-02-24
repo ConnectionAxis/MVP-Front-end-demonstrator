@@ -3,6 +3,7 @@ import DataManager from '../../../utils/DataManager.js';
 import Form from 'react-bootstrap/Form';
 import PinCheckbox from '../../../elements/PinCheckbox.js';
 import LoadingMask from '../../../components/LoadingMask.js';
+import ModalConfirm from '../../../components/ModalConfirm.js';
 
 class Account extends Component {
 	_mount = false;
@@ -14,11 +15,14 @@ class Account extends Component {
 		this.state = {
 			erEmail: false,
 			user: user,
-			loading: true
+			loading: true,
+			modal: false,
+			confirm: {}
 		};
 
 		this.inputChange = this.inputChange.bind(this);
 		this.updateSettings = this.updateSettings.bind(this);
+		this.confirmAction = this.confirmAction.bind(this);
 	}
 
 	componentDidMount() {
@@ -54,6 +58,35 @@ class Account extends Component {
 			me.setState({ loading: false });
 		}, 1000);
 
+	}
+
+	confirmAction(e, action) {
+		var message = '';
+
+		switch(action) {
+			case 'deactivate':
+				message = 'Are you sure - deactivate ConAx account?';
+				break;
+			case 'delete':
+				message = 'Your ConAx account will be deleted, do you want to continue?';
+				break;
+			default:
+		}
+
+		this.setState({
+			modal: true,
+			confirm: {
+				action: action,
+				title: 'Account settings',
+				message: message
+			}
+		}, () => {
+			this._modal.show();
+		});
+	}
+
+	onConfirm(action, confirm) {
+		console.log('[onConfirm]', action, confirm);
 	}
 
 	render() {
@@ -125,8 +158,8 @@ class Account extends Component {
 				<div>
 					<h3 className="h5 font-600 mb-3">Account</h3>
 					<div>
-						<button className="c-btn c-btn-default c-btn-round c-btn-animated mr-3 mb-3">Deactivate account</button>
-						<button className="c-btn c-btn-default c-btn-round c-btn-animated mb-3">Delete account</button>
+						<button className="c-btn c-btn-default c-btn-round c-btn-animated mr-3 mb-3" onClick={(e) => this.confirmAction(e, "deactivate")}>Deactivate account</button>
+						<button className="c-btn c-btn-default c-btn-round c-btn-animated mb-3" onClick={(e) => this.confirmAction(e, "delete")}>Delete account</button>
 					</div>
 				</div>
 				<hr className="my-4" />
@@ -134,7 +167,8 @@ class Account extends Component {
 					<button className="c-btn c-btn-default c-btn-round c-btn-animated mr-3 mb-3" onClick={(e) => this.updateSettings(e, "reset")}>Cancel</button>
 					<button className="c-btn c-btn-round c-btn-animated mb-3" onClick={(e) => this.updateSettings(e, "save")}>Save Settings</button>
 				</div>
-				{ this.state.loading ? <LoadingMask /> : null }
+				{ this.state.loading && <LoadingMask /> }
+				{ this.state.modal && <ModalConfirm ref={(modal) => {this._modal = modal;}} confirm={this.state.confirm} onConfirm={this.onConfirm} /> }
 			</div>
 		);
 	}
