@@ -153,7 +153,7 @@ class SignUpModal extends Component {
 	render() {
 		return (
 			<>
-				<Modal show={this.state.showModal} onHide={this.hide} size="sm">
+				<Modal show={this.state.showModal} onHide={this.hide} size="sm" centered>
 					<Modal.Header closeButton>
 						<Modal.Title className="text-curious-blue font-600">Sign Up</Modal.Title>
 					</Modal.Header>
@@ -169,7 +169,7 @@ class SignUpModal extends Component {
 									<h3 className="text-curious-blue c-link font-600" onClick={this.hide}>Ready for Sign In</h3>
 								</div>
 							) : (
-								<div className="sign-form">
+								<div className="input-form">
 									<form id="conax-sign-up">
 										<div className="form-group">
 											<label htmlFor="sign-up-email" className={"input-label "+(this.state.erEmail ? "" : "hide")}>Required *</label>

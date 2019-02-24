@@ -94,7 +94,7 @@ class SignInForm extends Component {
 	render() {
 		return (
 			<div className="row">
-				<div className="sign-form offset-lg-2 col-lg-8 offset-md-1 col-md-10 col-10 offset-1">
+				<div className="input-form offset-lg-2 col-lg-8 offset-md-1 col-md-10 col-10 offset-1">
 					<form id="conax-sign-in">
 						<div className="form-group">
 							<label htmlFor="sign-in-email" className={"input-label "+(this.state.erEmail ? "" : "hide")}>Required *</label>

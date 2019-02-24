@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import NavigationBar from '../components/NavigationBar.js';
-import LoadingMask from '../components/LoadingMask.js';
 import ModalDialog from '../components/ModalDialog.js';
+// import LoadingMask from '../components/LoadingMask.js';
 
 import Default from './workspaces/Default.js';
 import Networks from './workspaces/Networks.js';

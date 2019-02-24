@@ -44,7 +44,7 @@ class ModalDialog extends Component {
 	render() {
 		return (
 			<>
-				<Modal show={this.state.showModal} onHide={this.hide} size="lg">
+				<Modal show={this.state.showModal} onHide={this.hide} size="lg" centered>
 					<Modal.Header closeButton>
 						<Modal.Title className="text-curious-blue font-600">{this.state.title}</Modal.Title>
 					</Modal.Header>

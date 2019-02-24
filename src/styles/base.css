@@ -173,25 +173,25 @@ svg.social-icon {
 }
 
 /* SignIn form styles */
-.sign-form input.form-control {
+.input-form input.form-control {
 	outline: 0;
 	padding-top: 0.4rem;
 	padding-bottom: 0.4rem;
 	height: auto;
 }
 
-.sign-form input.form-control:focus,
-.sign-form input.form-control:active {
+.input-form input.form-control:focus,
+.input-form input.form-control:active {
 	box-shadow: none !important;
 	outline: 0 !important;
 	-webkit-appearance: none;
 }
 
-.sign-form .form-group {
+.input-form .form-group {
 	position: relative;
 }
 
-.sign-form .form-group label.input-label {
+.input-form .form-group label.input-label {
 	position: absolute;
 	color: var(--curious-blue);
 	right: 5%;
@@ -200,8 +200,8 @@ svg.social-icon {
 	transform: translate(0, -50%);
 }
 
-.sign-form .form-group.hide,
-.sign-form .form-group label.hide {
+.input-form .form-group.hide,
+.input-form .form-group label.hide {
 	display: none;
 }
 
@@ -233,6 +233,14 @@ svg.social-icon {
   border-radius: 2rem;
 }
 
+.c-btn-default {
+	color: var(--rolling-stone);
+	background-color: var(--gallery);
+}
+.c-btn-default.c-btn-round {
+	border-color: var(--gallery);
+}
+
 .c-btn-animated {
   transition:         0.08s ease-in;
   -o-transition:      0.08s ease-in;
@@ -248,6 +256,12 @@ svg.social-icon {
 .c-btn:active {
   background-color: color-mod(var(--curious-blue) l(-5%));
   transition: none;
+}
+
+.c-btn-default:hover {
+	color: var(--white) !important;
+	background-color: var(--curious-blue) !important;
+	border-color: var(--curious-blue);
 }
 
 .c-btn.c-btn-animated:hover {
@@ -401,6 +415,38 @@ div.c-nav-btn {
 .c-tab-nav.--column .nav-link.active {
 	color: var(--curious-blue);
 	background-color: inherit;
+}
+
+/* PinCheckbox styles */
+.pin-check-wrap {
+	position: relative;
+	cursor: pointer;
+	width: 2.2rem;
+	height: 1.5rem;
+	border-radius: 1.5rem;
+	border: 1px solid var(--alto-2);
+}
+
+.pin-check-in {
+	position: absolute;
+	top: 0;
+	left: 0;
+	margin: -1px -1px 0 -1px;
+	cursor: pointer;
+	width: 1.5rem;
+	height: 1.5rem;
+	border-radius: 1.5rem;
+	border: 1px solid var(--alto-2);
+	background-color: var(--white);
+}
+
+.pin-check.checked .pin-check-wrap {
+	background-color: var(--curious-blue);
+}
+
+.pin-check.checked .pin-check-in {
+	left: auto;
+	right: 0;
 }
 
 /* Loading Mask styles */

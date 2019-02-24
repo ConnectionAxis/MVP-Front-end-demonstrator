@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import Account from './Settings/Account.js';
+import Claim from './Settings/Claim.js';
 
 class Settings extends Component {
 	_mount = false;
@@ -33,36 +35,29 @@ class Settings extends Component {
 				</div>
 				<div className="col-lg-7 col-md-6 col-sm-12 border-right pt-3 px-3">
 					{this.state.active === "account" &&
-						<>
-							<h1 className="h3 font-600 text-curious-blue mb-3">Account settings</h1>
-							<p className="mb-2">Email</p>
-							<p className="mb-2">Change your password</p>
-						</>
+						<Account />
 					}
 					{this.state.active === "profile" &&
 						<>
-							<h1 className="h3 font-600 text-curious-blue mb-3">Edit profile</h1>
-							<p className="mb-2">Photo</p>
-							<p className="mb-2">First name / Last name</p>
-							<p className="mb-2">Username</p>
+							<div className="px-md-3">
+								<h1 className="h3 font-600 mb-3">Edit profile</h1>
+								<p className="mb-2">Photo</p>
+								<p className="mb-2">First name / Last name</p>
+								<p className="mb-2">Username</p>
+							</div>
 						</>
 					}
 					{this.state.active === "claim" &&
-						<>
-							<h1 className="h3 font-600 text-curious-blue mb-3">Claim ConAx</h1>
-							<p className="mb-2">Claim your social networking</p>
-							<p className="mb-2">Claim your website</p>
-							<p className="mb-2">Claim your ConAx Channels</p>
-							<p className="mb-2">Featured Logo</p>
-							<p className="mb-2">Early access to tools</p>
-						</>
+						<Claim />
 					}
 					{this.state.active === "notification" &&
 						<>
-							<h1 className="h3 font-600 text-curious-blue mb-3">Notification Inbox</h1>
-							<p className="mb-2">On ConAx</p>
-							<p className="mb-2">Connect with Creative Networks</p>
-							<p className="mb-2">Integrate your social networks</p>
+							<div className="px-md-3">
+								<h1 className="h3 font-600 mb-3">Notification Inbox</h1>
+								<p className="mb-2">On ConAx</p>
+								<p className="mb-2">Connect with Creative Networks</p>
+								<p className="mb-2">Integrate your social networks</p>
+							</div>
 						</>
 					}
 				</div>

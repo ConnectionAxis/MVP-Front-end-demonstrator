@@ -79,7 +79,7 @@ class NavigationBar extends Component {
 									className="form-control" />
 							</div>
 						</div>
-						<div className="flex-fill text-right" style={{ "min-width": "100px" }}>
+						<div className="flex-fill text-right" style={{ minWidth: "100px" }}>
 							<CNavButton type="text" text="Create new Project" onClick={(e) => this.handleAction(e, "new-project")} className="ml-1 d-lg-inline-block d-none"/>
 							<CNavButton type="text" text="Create new Channel" onClick={(e) => this.handleAction(e, "new-channel")} className="ml-1 d-lg-inline-block d-none"/>
 							<CNavButton type="user" text={this.state.user.name} onClick={(e) => this.handleAction(e, "user")} className="ml-1 d-sm-inline-block d-none"/>

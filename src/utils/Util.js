@@ -24,4 +24,16 @@ export default class Util {
 				return false;
 		}
 	}
+
+	static uniqueValue(len) {
+		var output = '';
+		const ts = new Date();
+
+		if( this.isEmpty(len) )
+			len = 5;
+
+		output = this.getHash(ts.getTime());
+
+    return output.substring(0, len);
+	}
 }
