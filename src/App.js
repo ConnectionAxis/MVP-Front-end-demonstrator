@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import {init as firebaseInit} from './config/firebase.js';
 import DataManager from './utils/DataManager.js';
 import Util from './utils/Util.js';
 import WorkSpace from './pages/WorkSpace.js';
 import LoginPage from './pages/LoginPage.js';
+import Page404 from './pages/404.js';
 // import LoadPage from './pages/LoadPage.js';
 
 class App extends Component {
@@ -14,6 +16,7 @@ class App extends Component {
     };
 
     this.handleUser = this.handleUser.bind(this);
+    this.defaultPath = this.defaultPath.bind(this);
 
     firebaseInit();
   }
@@ -40,15 +43,21 @@ class App extends Component {
     }
   }
 
+  defaultPath() {
+    if( this.state.session )
+      return <WorkSpace handleUser={this.handleUser}/>;
+    else
+      return <LoginPage handleUser={this.handleUser}/>;
+  }
+
   render() {
     return (
-      <>
-        {this.state.session ? (
-            <WorkSpace handleUser={this.handleUser}/>
-          ) : (
-            <LoginPage handleUser={this.handleUser}/>
-          )}
-      </>
+      <Router>
+        <Switch>
+          <Route path="/" exact component={this.defaultPath}/>
+          <Route component={Page404} />
+        </Switch>
+      </Router>
     );
   }
 }
