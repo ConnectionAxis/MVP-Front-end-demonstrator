@@ -3,9 +3,9 @@ import React, { Component } from 'react';
 
 export default class Networks extends Component {
 	_mount = false;
-	constructor(props) {
-		super(props);
-	}
+	// constructor(props) {
+	// 	super(props);
+	// }
 
 	componentDidMount() {
 		this._mount = true;

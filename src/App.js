@@ -6,6 +6,8 @@ import Util from './utils/Util.js';
 import WorkSpace from './pages/WorkSpace.js';
 import LoginPage from './pages/LoginPage.js';
 import Page404 from './pages/404.js';
+import PrivacyPolicy from './pages/static/PrivacyPolicy.js';
+import TermsOfUse from './pages/static/TermsOfUse.js';
 // import LoadPage from './pages/LoadPage.js';
 
 class App extends Component {
@@ -17,6 +19,8 @@ class App extends Component {
 
     this.handleUser = this.handleUser.bind(this);
     this.defaultPath = this.defaultPath.bind(this);
+    this.staticPage = this.staticPage.bind(this);
+    this.switchPath = this.switchPath.bind(this);
 
     firebaseInit();
   }
@@ -43,11 +47,41 @@ class App extends Component {
     }
   }
 
-  defaultPath() {
+  defaultPath(e) {
+    if( !Util.isEmpty(e.history) )
+      this.history = e.history;
+
     if( this.state.session )
-      return <WorkSpace handleUser={this.handleUser}/>;
+      return <WorkSpace
+                handleUser={this.handleUser}
+                switchPath={this.switchPath} />;
     else
       return <LoginPage handleUser={this.handleUser}/>;
+  }
+
+  switchPath(path) {
+    switch(path) {
+      case "privacy":
+        this.history.push("/privacy");
+        break;
+      case "default":
+        this.history.push("/");
+        break;
+      default:
+    }
+  }
+
+  staticPage(e) {
+    if( !Util.isEmpty(e.history) )
+      this.history = e.history;
+
+    switch(e.match.path) {
+      case "/privacy":
+        return <PrivacyPolicy switchPath={this.switchPath} />;
+      case "/terms":
+        return <TermsOfUse switchPath={this.switchPath} />;
+      default:
+    }
   }
 
   render() {
@@ -55,6 +89,8 @@ class App extends Component {
       <Router>
         <Switch>
           <Route path="/" exact component={this.defaultPath}/>
+          <Route path="/privacy" exact component={this.staticPage}/>
+          <Route path="/terms" exact component={this.staticPage}/>
           <Route component={Page404} />
         </Switch>
       </Router>

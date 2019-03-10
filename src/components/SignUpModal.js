@@ -4,6 +4,7 @@ import ConAxLogo from '../elements/ConAxLogo.js';
 import Modal from 'react-bootstrap/Modal';
 import DataManager from '../utils/DataManager.js';
 import LoadingMask from '../components/LoadingMask.js';
+import { NavLink } from 'react-router-dom';
 
 class SignUpModal extends Component {
 	constructor(props) {
@@ -220,7 +221,10 @@ class SignUpModal extends Component {
 					</Modal.Body>
 					<Modal.Footer>
 						<div className="text-center">
-							<p>By signing up you indicate that you have read and agree to <a href="#conax" className="text-curious-blue c-link">ConAx Terms of Use</a> and <a href="#conax" className="text-curious-blue c-link">Privacy Policy</a></p>
+							<p>By signing up you indicate that you have read and agree to
+								&nbsp;<NavLink to="/terms" className="text-curious-blue c-link">ConAx Terms of Use</NavLink> and
+								&nbsp;<NavLink to="/privacy" className="text-curious-blue c-link">Privacy Policy</NavLink>
+							</p>
 						</div>
 					</Modal.Footer>
 				</Modal>

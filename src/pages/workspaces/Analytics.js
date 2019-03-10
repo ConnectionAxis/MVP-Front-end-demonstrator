@@ -3,9 +3,9 @@ import LoadingMask from '../../components/LoadingMask.js';
 
 export default class Analytics extends Component {
 	_mount = false;
-	constructor(props) {
-		super(props);
-	}
+	// constructor(props) {
+	// 	super(props);
+	// }
 
 	componentDidMount() {
 		this._mount = true;

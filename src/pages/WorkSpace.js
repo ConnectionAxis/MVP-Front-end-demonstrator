@@ -6,7 +6,6 @@ import ModalDialog from '../components/ModalDialog.js';
 import Default from './workspaces/Default.js';
 import Networks from './workspaces/Networks.js';
 import Analytics from './workspaces/Analytics.js';
-import Privacy from './workspaces/Privacy.js';
 import Settings from './workspaces/Settings.js';
 
 class WorkSpace extends Component {
@@ -15,7 +14,7 @@ class WorkSpace extends Component {
 		super(props);
 
 		this.state = {
-			page: "default",
+			page: (props.hasOwnProperty("staticPage")) ? this.props.staticPage : "default",
 			modal: false,
 			modalType: ""
 		}
@@ -42,6 +41,10 @@ class WorkSpace extends Component {
 			case "logout":
 				this.props.handleUser("logout");
 				break;
+			case "privacy":
+			case "default":
+				this.props.switchPath(page);
+				break;
 			default:
 				this.setState({ page: page });
 		}
@@ -55,8 +58,6 @@ class WorkSpace extends Component {
 				return <Networks />
 			case "analytics":
 				return <Analytics />
-			case "privacy":
-				return <Privacy />
 			default:
 				return <Default />
 		}
@@ -73,6 +74,7 @@ class WorkSpace extends Component {
 			<>
 				<NavigationBar
 					switchPage={this.switchPage}
+					switchPath={this.props.switchPath}
 					openModal={this.openModal} />
 				<div className="workspace --with-nav d-flex">
 					<div className="container px-0">
