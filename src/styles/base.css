@@ -136,6 +136,7 @@ body {
 .text-silver { color: var(--silver); }
 .text-curious-blue { color: var(--curious-blue) !important; }
 .text-conax-blue { color: var(--conax-blue) !important; }
+.text-base { color: var(--rolling-stone); }
 
 .text-sm-center { text-align: center; }
 .text-sm-right { text-align: right; }

@@ -4,6 +4,7 @@ import CNavButton from '../elements/CNavButton.js';
 import DataManager from '../utils/DataManager.js';
 import Util from '../utils/Util.js';
 import Dropdown from 'react-bootstrap/Dropdown';
+import format from 'string-format';
 
 class NavigationBar extends Component {
 	_mount = false;
@@ -31,8 +32,11 @@ class NavigationBar extends Component {
   	this._mount = true;
   	const user = DataManager.getCookieObject('conax-user');
   	if( !Util.isEmpty(user) ) {
-  		if( Util.isEmpty(user.name) )
+  		if( Util.isEmpty(user.firstname) && Util.isEmpty(user.lastname) )
   			user.name = user.email;
+  		else {
+  			user.name = format('{0} {1}', user.firstname, user.lastname);
+  		}
 
   		this.setState({ user: user });
   	}

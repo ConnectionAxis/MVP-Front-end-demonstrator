@@ -13,11 +13,7 @@ class SignUpModal extends Component {
 		this.state = {
       showModal: false,
 			signEmail: '',
-			signPassword: '',
-			signPassword2: '',
 			erEmail: false,
-			erPassword: false,
-			erPassword2: false,
 			erMsg: '',
 			formDisable: false,
 			loading: false,
@@ -45,20 +41,8 @@ class SignUpModal extends Component {
 					if( data[0] ) {
 						this.setState({ 'formDisable': false, erMsg: 'Already signed up, try to sign in', loading: false });
 					} else {
-						DataManager.addObject('users', {
-							email: this.state.signEmail,
-							hash: Util.getHash(this.state.signEmail, this.state.signPassword),
-							admin: false,
-							name: '',
-							surname: ''
-						})
-						.then(user => {
-							this.setState({ 'loading': false, welcome: true });
-							// Add new user and process to workspace
-							console.log('[new user]', this.state, user);
-						}, error => {
-							this.setState({ 'formDisable': false, erMsg: 'Sign Up server error', loading: false });
-						});
+						this.props.showSignUpDetails(e, this.state.signEmail);
+						this.hide();
 					}
 				}, error => {
 					this.setState({ 'formDisable': false, erMsg: 'Sign Up error', loading: false });
@@ -68,30 +52,6 @@ class SignUpModal extends Component {
 
 	formValidate(callback) {
 		var valid = true;
-		// Sign Password
-		if( this.state.signPassword.length > 0 ) {
-			if( this.state.signPassword.length > 7 ) {
-				this.setState({ 'erPassword': false });
-				if( this.state.signPassword2.length > 0 ) {
-					if( this.state.signPassword === this.state.signPassword2 ) {
-						this.setState({ 'erPassword2': false });
-					} else {
-						this.setState({ 'erPassword2': true, 'erMsg': 'Passwords didn\'t match' });
-						valid = false;
-					}
-				} else {
-					this.setState({ 'erPassword2': true });
-					valid = false;
-				}
-			} else {
-				this.setState({ 'erPassword': true, 'erMsg': 'Weak password' });
-				valid = false;
-			}
-		} else {
-			this.setState({ 'erPassword': true });
-			valid = false;
-		}
-
 		// Sign Email
 		if( this.state.signEmail.length > 0 ) {
 			if( Util.validateEmail(this.state.signEmail) ) {
@@ -118,12 +78,6 @@ class SignUpModal extends Component {
 			case 'signEmail':
 				this.setState({ 'erEmail': !(value.length > 0), 'erMsg': '' });
 				break;
-			case 'signPassword':
-				this.setState({ 'erPassword': !(value.length > 0), 'erMsg': '' });
-				break;
-			case 'signPassword2':
-				this.setState({ 'erPassword2': !(value.length > 0), 'erMsg': '' });
-				break;
 			default:
 				break;
 		}
@@ -136,11 +90,7 @@ class SignUpModal extends Component {
 		this.setState({
 			showModal: true,
 			signEmail: '',
-			signPassword: '',
-			signPassword2: '',
 			erEmail: false,
-			erPassword: false,
-			erPassword2: false,
 			erMsg: '',
 			formDisable: false,
 			loading: false,
@@ -183,32 +133,10 @@ class SignUpModal extends Component {
 												placeholder="Email"
 												className="conax-sign-input form-control" />
 										</div>
-										<div className="form-group">
-											<label htmlFor="sign-up-password" className={"input-label "+(this.state.erPassword ? "" : "hide")}>Required *</label>
-											<input
-												value={this.state.signPassword}
-												onChange={ev => this.inputChange('signPassword', ev)}
-												id="sign-up-password"
-												type="password"
-												name="password"
-												placeholder="Password"
-												className="conax-sign-input form-control" />
-										</div>
-										<div className="form-group">
-											<label htmlFor="sign-up-password2" className={"input-label "+(this.state.erPassword2 ? "" : "hide")}>Required *</label>
-											<input
-												value={this.state.signPassword2}
-												onChange={ev => this.inputChange('signPassword2', ev)}
-												id="sign-up-password2"
-												type="password"
-												name="password2"
-												placeholder="Confirm password"
-												className="conax-sign-input form-control" />
-										</div>
 										<div id="sign-up-alert" className={"form-group text-center mb-1 "+(this.state.erMsg.length > 0 ? "" : "hide")}>
 											<label className="text-curious-blue">{this.state.erMsg}</label>
 										</div>
-										<div className="form-group text-center">
+										<div className="form-group text-center mt-4">
 											<button
 												className="c-btn c-btn-lg c-btn-round c-btn-animated px-5"
 												onClick={this.formSubmit}

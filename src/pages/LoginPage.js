@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import ConAxLogo from '../elements/ConAxLogo.js';
 import SignInForm from '../components/SignInForm.js';
 import SignUpModal from '../components/SignUpModal.js';
+import SignUpModal2 from '../components/SignUpModal2.js';
 import Social from '../components/Social.js';
 
 class LoginPage extends Component {
@@ -9,12 +10,17 @@ class LoginPage extends Component {
 		super(props);
 
 		this.showSignUp = this.showSignUp.bind(this);
+		this.showSignUpDetails = this.showSignUpDetails.bind(this);
 		this.userLogin = this.userLogin.bind(this);
 	}
 
 	showSignUp(e) {
 		e.preventDefault();
 		this._modal.show();
+	}
+
+	showSignUpDetails(e, email) {
+		this._modal2.show(email);
 	}
 
 	userLogin(user) {
@@ -49,7 +55,11 @@ class LoginPage extends Component {
 						</div>
 					</div>
 				</div>
-				<SignUpModal ref={(modal) => {this._modal = modal;}} />
+				<SignUpModal
+					showSignUpDetails={this.showSignUpDetails}
+					ref={(modal) => {this._modal = modal;}} />
+				<SignUpModal2
+					ref={(modal2) => {this._modal2 = modal2;}} />
 			</div>
 		);
 	}
