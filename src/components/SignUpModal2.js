@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import Util from '../utils/Util.js';
 // import ConAxLogo from '../elements/ConAxLogo.js';
 import Modal from 'react-bootstrap/Modal';
+import Overlay from 'react-bootstrap/Overlay';
+import Popover from 'react-bootstrap/Popover';
+import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import DataManager from '../utils/DataManager.js';
 import LoadingMask from '../components/LoadingMask.js';
 import { NavLink } from 'react-router-dom';
@@ -11,14 +14,14 @@ class SignUpModal2 extends Component {
 		super(props);
 
 		this.state = {
-      showModal: false,
-      firstName: '',
-      erFirstName: false,
-      lastName: '',
-      erLastName: false,
-      corporate: '',
-      erCorpoarate: false,
-      activity: '',
+			showModal: false,
+			firstName: '',
+			erFirstName: false,
+			lastName: '',
+			erLastName: false,
+			corporate: '',
+			erCorpoarate: false,
+			activity: '',
 			signEmail: '',
 			erEmail: false,
 			corporateEmail: '',
@@ -32,13 +35,17 @@ class SignUpModal2 extends Component {
 			formDisable: false,
 			loading: false,
 			welcome: false
-    }
+		}
 
 		this.formSubmit = this.formSubmit.bind(this);
 		this.inputChange = this.inputChange.bind(this);
 
 		this.show = this.show.bind(this);
 		this.hide = this.hide.bind(this);
+	}
+
+	componentDidMount() {
+		// $('[data-toggle="tooltip"]').tooltip();
 	}
 
 	formSubmit(e) {
@@ -283,7 +290,10 @@ class SignUpModal2 extends Component {
 										<div className="form-group mb-1">
 											<div className="row align-items-end no-gutters">
 												<div className="col-md-12 offset-md-0 col-10 offset-1 px-2">
-													<label htmlFor="sign-up-corporate" className="font-600">Corporate</label>
+													<label htmlFor="sign-up-corporate" className="font-600 mr-1">Corporate</label>
+													<OverlayTrigger placement="right" overlay={<Popover>Please enter your institutional details to optimisation search of your activities</Popover>}>
+													  <span className="badge badge-info c-link px-2">i</span>
+													</OverlayTrigger>
 													<div className="position-relative">
 														<label htmlFor="sign-up-corporate" className={"input-label "+(this.state.erCorpoarate ? "" : "hide")}>Required *</label>
 														<input
@@ -388,7 +398,7 @@ class SignUpModal2 extends Component {
 															onChange={ev => this.inputChange('accept', ev)}
 															id="accept" />
 														<label className="form-check-label" htmlFor="accept">
-															I accept the <NavLink to="/terms" target="_blank" className="text-curious-blue c-link">Terms</NavLink> & <NavLink to="/privacy" target="_blank" className="text-curious-blue c-link">Privacy policies</NavLink>
+															I agree to the <NavLink to="/terms" target="_blank" className="text-curious-blue c-link">Terms of use</NavLink> and acknowledge the <NavLink to="/privacy" target="_blank" className="text-curious-blue c-link">Privacy policy</NavLink>
 														</label>
 													</div>
 												</div>

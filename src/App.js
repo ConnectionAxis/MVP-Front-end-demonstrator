@@ -5,6 +5,7 @@ import DataManager from './utils/DataManager.js';
 import Util from './utils/Util.js';
 import WorkSpace from './pages/WorkSpace.js';
 import LoginPage from './pages/LoginPage.js';
+import SignUpPage from './pages/SignUpPage.js';
 import Page404 from './pages/404.js';
 import PrivacyPolicy from './pages/static/PrivacyPolicy.js';
 import TermsOfUse from './pages/static/TermsOfUse.js';
@@ -14,7 +15,8 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      session: false
+      session: false,
+      state: 'login'
     };
 
     this.handleUser = this.handleUser.bind(this);
@@ -28,7 +30,7 @@ class App extends Component {
   componentDidMount() {
     const user = DataManager.getCookieObject('conax-user');
     if( !Util.isEmpty(user) ) {
-      this.setState({ session: true });
+      this.setState({ session: true, state: 'active' });
     }
   }
 
@@ -38,10 +40,13 @@ class App extends Component {
         const user = DataManager.getCookieObject('conax-user');
         if( !Util.isEmpty(user) )
           DataManager.removeCookieObject('conax-user');
-        this.setState({ session: false });
+        this.setState({ session: false, state: 'login' });
         break;
       case "login":
-        this.setState({ session: true });
+        this.setState({ session: true, state: 'active' });
+        break;
+      case "signup":
+        this.setState({ session: false, state: 'signup' });
         break;
       default:
     }
@@ -55,8 +60,17 @@ class App extends Component {
       return <WorkSpace
                 handleUser={this.handleUser}
                 switchPath={this.switchPath} />;
-    else
-      return <LoginPage handleUser={this.handleUser}/>;
+    else {
+      switch( this.state.state ) {
+        case 'signup':
+          return <SignUpPage
+                    handleUser={this.handleUser}
+                    switchPath={this.switchPath} />;
+        case 'login':
+          return <LoginPage handleUser={this.handleUser}/>;
+        default:
+      }
+    }
   }
 
   switchPath(path) {

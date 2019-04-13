@@ -27,6 +27,10 @@ class SignUpModal extends Component {
 		this.hide = this.hide.bind(this);
 	}
 
+	componentWillUnmount() {
+		this.setState = (state,callback)=>{ return; };
+	}
+
 	formSubmit(e) {
 		e.preventDefault();
 

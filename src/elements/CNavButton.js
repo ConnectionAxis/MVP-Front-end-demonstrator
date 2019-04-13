@@ -90,14 +90,16 @@ class CNavButton extends Component {
 		}
 
 		if( params.type === 'user' ) {
-			if( params.text.length > 14 )
-				params.text = params.text.substring(15);
+			var tx = params.text;
+			if( tx.length > 14 ) {
+				tx = tx.substring(0, 15);
+			}
 
 			output.push(
 				<span
 					key="user"
 					className="c-user-icon">
-					{params.text.split('')[0]}
+					{tx.split('')[0]}
 				</span>
 			);
 		}

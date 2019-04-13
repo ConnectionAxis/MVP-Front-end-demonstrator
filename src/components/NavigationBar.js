@@ -31,6 +31,7 @@ class NavigationBar extends Component {
   componentDidMount() {
   	this._mount = true;
   	const user = DataManager.getCookieObject('conax-user');
+
   	if( !Util.isEmpty(user) ) {
   		if( Util.isEmpty(user.firstname) && Util.isEmpty(user.lastname) )
   			user.name = user.email;

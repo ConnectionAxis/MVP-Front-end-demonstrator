@@ -52,7 +52,17 @@ body {
 .bg-gallery { background-color: var(--gallery); }
 .bg-air { background-color: var(--air); }
 .bg-gray-1 { background-color: var(--gray-1); }
+.bg-alto { background-color: var(--alto); }
 .bg-curious-blue { background-color: var(--curious-blue); }
+
+/* Border styles */
+.bd-top { border-bottom-width: 1px; border-bottom-style: solid; }
+.bd-bottom { border-top-width: 1px; border-top-style: solid; }
+.bd-left { border-left-width: 1px; border-left-style: solid; }
+.bd-right { border-right-width: 1px; border-right-style: solid; }
+.bd-none { border-width: 0 !important; }
+.bd-alto { border-color: var(--alto); }
+.bd-silver { border-color: var(--silver); }
 
 @media (min-height: 600px), (min-width: 768px) {
   .screen,
@@ -140,6 +150,7 @@ body {
 
 .text-sm-center { text-align: center; }
 .text-sm-right { text-align: right; }
+.text-sm-left { text-align: left; }
 
 .p-l { font-size: 1.15rem; }
 
@@ -169,8 +180,12 @@ svg.social-icon {
   height: var(--social-dimension);
 }
 
+.social.--white svg.social-icon {
+	fill: var(--white);
+}
+
 .social-icon:hover {
-  fill: var(--curious-blue);
+  fill: var(--curious-blue) !important;
 }
 
 /* SignIn form styles */

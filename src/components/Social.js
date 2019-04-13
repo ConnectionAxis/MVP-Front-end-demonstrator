@@ -1,8 +1,14 @@
 import React, { Component } from 'react';
+import format from 'string-format';
 
 class Social extends Component {
 	constructor(props) {
 		super(props);
+
+		this.baseCls = "social";
+
+		if( props.color )
+			this.baseCls += format(' {0}', props.color);
 
 		this.linkClick = this.linkClick.bind(this);
 	}
@@ -13,7 +19,7 @@ class Social extends Component {
 
 	render() {
 		return (
-			<div className="social">
+			<div className={this.baseCls}>
 				{/* Facebook link */}
 				<a href="#top" className="social-item" onClick={e => this.linkClick(e)}>
 					<svg className="social-icon" version="1.1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 54.3 53.6">
