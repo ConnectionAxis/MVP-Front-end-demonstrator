@@ -153,6 +153,8 @@ body {
 .text-sm-left { text-align: left; }
 
 .p-l { font-size: 1.15rem; }
+.p-m { font-size: 1rem; }
+.p-s { font-size: 0.85rem; }
 
 /* Social links styles */
 .social {
@@ -463,6 +465,10 @@ div.c-nav-btn {
 .pin-check.checked .pin-check-in {
 	left: auto;
 	right: 0;
+}
+
+.popover-wide {
+	min-width: 320px;
 }
 
 /* Loading Mask styles */

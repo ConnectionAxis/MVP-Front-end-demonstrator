@@ -25,6 +25,23 @@ export default class Util {
 		}
 	}
 
+	static eachInArray(array, callback) {
+		for (var i = array.length - 1; i >= 0; i--) {
+			if( i === 0 ) {
+				callback(array[i], i, true);
+			} else {
+				callback(array[i], i, false);
+			}
+		}
+	}
+
+	static eachInObject(object, callback) {
+		const keys = Object.keys(object);
+		for (var i = keys.length - 1; i >= 0; i--) {
+			callback(keys[i], object[keys[i]]);
+		}
+	}
+
 	static uniqueValue(len) {
 		var output = '';
 		const ts = new Date();

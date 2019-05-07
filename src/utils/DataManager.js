@@ -1,6 +1,7 @@
 import firebase from 'firebase/app';
 import 'firebase/firestore';
 import cookie from 'react-cookies';
+import Util from './Util';
 
 let db;
 
@@ -72,7 +73,7 @@ export default class DataManager {
 		return new Promise((resolve, reject) => {
 			connection.update(data)
 				.then(() => {
-					resolve();
+					resolve(data);
 				})
 				.catch((error) => {
 					console.error('[DataManager:updateObject] error: %s', error);
@@ -88,6 +89,20 @@ export default class DataManager {
 	static setCookieObject(name, data) {
 		cookie.save(name, data);
 		return this.getCookieObject(name);
+	}
+
+	static updateCookieObject(name, data) {
+		var object = this.getCookieObject(name);
+		if( !Util.isEmpty(object) ) {
+			Util.eachInObject(data, (key, value) => {
+				if( object.hasOwnProperty(key) ) {
+					object[key] = value;
+				}
+			});
+			cookie.save(name, object);
+		} else {
+			console.error('[DataManager:updateCookieObject] No Cookie object "%s" found', name);
+		}
 	}
 
 	static removeCookieObject(name, callback) {

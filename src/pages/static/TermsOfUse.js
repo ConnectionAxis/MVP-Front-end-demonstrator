@@ -18,7 +18,7 @@ export default class TermsOfUse extends Component {
 						<div className="row no-gutters h-100">
 							<div className="col-lg-9 col-md-8 col-sm-12 border-right position-relative">
 								<div className="p-3">
-									<h1 className="h3 font-600 text-curious-blue mb-3">Conax Terms of Use</h1>
+									<h1 className="h4 font-600 text-curious-blue mb-3">Conax Terms of Use</h1>
 									<p className="mb-2">Conax Terms of Use content</p>
 								</div>
 							</div>

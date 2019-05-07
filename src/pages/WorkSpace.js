@@ -21,6 +21,7 @@ class WorkSpace extends Component {
 
 		this.openModal = this.openModal.bind(this);
 		this.switchPage = this.switchPage.bind(this);
+		this.switchPath = this.switchPath.bind(this);
 		this.switchWorkspace = this.switchWorkspace.bind(this);
 	}
 
@@ -50,6 +51,12 @@ class WorkSpace extends Component {
 		}
 	}
 
+	switchPath(path) {
+		if( path === 'default' )
+			this.setState({ page: path });
+		this.props.switchPath(path);
+	}
+
 	switchWorkspace() {
 		switch(this.state.page) {
 			case "settings":
@@ -74,7 +81,7 @@ class WorkSpace extends Component {
 			<>
 				<NavigationBar
 					switchPage={this.switchPage}
-					switchPath={this.props.switchPath}
+					switchPath={this.switchPath}
 					openModal={this.openModal} />
 				<div className="workspace --with-nav d-flex">
 					<div className="container px-0">

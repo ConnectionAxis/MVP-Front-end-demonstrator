@@ -60,6 +60,7 @@ export default class SignUpPage extends Component {
 							email: this.state.signEmail,
 							hash: Util.getHash(this.state.signEmail, this.state.signPassword),
 							admin: false,
+							show_badge: true,
 							firstname: this.state.firstName,
 							lastname: this.state.lastName,
 							corporate: this.state.corporate,

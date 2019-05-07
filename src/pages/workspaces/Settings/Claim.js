@@ -35,7 +35,7 @@ class Claim extends Component {
 	render() {
 		return (
 			<div className="input-form px-md-3">
-				<h1 className="h3 font-600 mb-3">Claim ConAx</h1>
+				<h1 className="h4 font-600 mb-3">Claim ConAx</h1>
 				<div>
 					<PinCheckbox
 						className="py-2"

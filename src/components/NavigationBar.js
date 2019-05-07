@@ -42,7 +42,7 @@ class NavigationBar extends Component {
   		this.setState({ user: user });
   	}
 
-  	this.testCounter();
+  	// this.testCounter();
   }
 
   componentWillUnmount() {
@@ -82,8 +82,11 @@ class NavigationBar extends Component {
 				<div className="container py-2 px-0">
 					<div className="d-flex no-gutters align-items-center px-3">
 						<div className="">
-							<div className="mr-2">
+							<div className="mr-2 d-sm-inline-block d-xl-none">
 								<ConAxLogo type="logo" width="42" cursor="pointer" onClick={(e) => this.handleMenu(e, "default")}/>
+							</div>
+							<div className="mr-2 d-xl-inline-block d-none">
+								<ConAxLogo type="logo+text" width="130" cursor="pointer" onClick={(e) => this.handleMenu(e, "default")}/>
 							</div>
 						</div>
 						{this.full ? (
@@ -98,10 +101,12 @@ class NavigationBar extends Component {
 								</div>
 							</div>
 							<div className="flex-fill text-right" style={{ minWidth: "100px" }}>
-								<CNavButton type="text" text="Create new Project" onClick={(e) => this.handleAction(e, "new-project")} className="ml-1 d-lg-inline-block d-none"/>
-								<CNavButton type="text" text="Create new Channel" onClick={(e) => this.handleAction(e, "new-channel")} className="ml-1 d-lg-inline-block d-none"/>
-								<CNavButton type="user" text={this.state.user.name} onClick={(e) => this.handleAction(e, "user")} className="ml-1 d-sm-inline-block d-none"/>
-								<CNavButton type="circle" icon="bell" onClick={(e) => this.handleAction(e, "notification")} className="ml-1" counter={this.state.counter}/>
+								<CNavButton type="text" text="Targeting & Analytics" onClick={(e) => this.handleAction(e, "targeting&analytics")} className="ml-1 d-xl-inline-block d-none"/>
+								<CNavButton type="text" text="Creative Networks" onClick={(e) => this.handleAction(e, "creative-networks")} className="ml-1 d-xl-inline-block d-none"/>
+								<CNavButton type="text" text="Notifications" onClick={(e) => this.handleAction(e, "notifications")} className="ml-1 d-xl-inline-block d-none"/>
+								{/* <CNavButton type="user" text={this.state.user.name} onClick={(e) => this.handleAction(e, "user")} className="ml-1 d-sm-inline-block d-none"/> */}
+								{/* <CNavButton type="circle" icon="bell" onClick={(e) => this.handleAction(e, "notification")} className="ml-1" counter={this.state.counter}/> */}
+								<CNavButton type="circle" icon="user" onClick={(e) => this.handleAction(e, "userprofile")} className="ml-1" />
 								<Dropdown className="conax-nav-dropdown">
 									<Dropdown.Toggle variant="success" id="dropdown-basic">
 										<CNavButton type="circle" icon="dots" className="ml-2" button={false}/>
@@ -109,9 +114,10 @@ class NavigationBar extends Component {
 									<Dropdown.Menu alignRight className="mt-3">
 										<Dropdown.Item className="font-600 py-2 d-block d-md-none" href="#new-project" onClick={(e) => this.handleAction(e, "user")}>{this.state.user.name}</Dropdown.Item>
 										<Dropdown.Divider className="d-block d-md-none" />
-										<Dropdown.Item className="font-600 py-2 text-curious-blue d-block d-lg-none" href="#new-project" onClick={(e) => this.handleAction(e, "new-project")}>Create new Project</Dropdown.Item>
-										<Dropdown.Item className="font-600 py-2 text-curious-blue d-block d-lg-none" href="#new-channel" onClick={(e) => this.handleAction(e, "new-channel")}>Create new Channel</Dropdown.Item>
-										<Dropdown.Divider className="d-block d-lg-none" />
+										<Dropdown.Item className="font-600 py-2 text-curious-blue d-block d-xl-none" href="#targeting" onClick={(e) => this.handleAction(e, "targeting&analytics")}>Targeting & Analytics</Dropdown.Item>
+										<Dropdown.Item className="font-600 py-2 text-curious-blue d-block d-xl-none" href="#creative-networks" onClick={(e) => this.handleAction(e, "creative-networks")}>Creative Networks</Dropdown.Item>
+										<Dropdown.Item className="font-600 py-2 text-curious-blue d-block d-xl-none" href="#notifications" onClick={(e) => this.handleAction(e, "notifications")}>Notifications</Dropdown.Item>
+										<Dropdown.Divider className="d-block d-xl-none" />
 										<Dropdown.Item className="font-600 py-2" href="#settings" onClick={(e) => this.handleMenu(e, "settings")}>ConAx Settings</Dropdown.Item>
 										<Dropdown.Item className="font-600 py-2" href="#networks" onClick={(e) => this.handleMenu(e, "networks")}>Creative Networks</Dropdown.Item>
 										<Dropdown.Item className="font-600 py-2" href="#analytics" onClick={(e) => this.handleMenu(e, "analytics")}>Targeting and analytics</Dropdown.Item>

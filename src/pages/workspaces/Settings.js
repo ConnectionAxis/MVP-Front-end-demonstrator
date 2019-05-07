@@ -40,7 +40,7 @@ class Settings extends Component {
 					{this.state.active === "profile" &&
 						<>
 							<div className="px-md-3">
-								<h1 className="h3 font-600 mb-3">Edit profile</h1>
+								<h1 className="h4 font-600 mb-3">Edit profile</h1>
 								<p className="mb-2">Photo</p>
 								<p className="mb-2">First name / Last name</p>
 								<p className="mb-2">Username</p>
@@ -53,7 +53,7 @@ class Settings extends Component {
 					{this.state.active === "notification" &&
 						<>
 							<div className="px-md-3">
-								<h1 className="h3 font-600 mb-3">Notification Inbox</h1>
+								<h1 className="h4 font-600 mb-3">Notification Inbox</h1>
 								<p className="mb-2">On ConAx</p>
 								<p className="mb-2">Connect with Creative Networks</p>
 								<p className="mb-2">Integrate your social networks</p>

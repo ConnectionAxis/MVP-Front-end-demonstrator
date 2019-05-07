@@ -92,7 +92,7 @@ class Account extends Component {
 	render() {
 		return (
 			<div className="input-form px-md-3">
-				<h1 className="h3 font-600 mb-3">Account settings</h1>
+				<h1 className="h4 font-600 mb-3">Account settings</h1>
 				<div className="form-group mb-3">
 					<label htmlFor="input-email">Email address</label>
 					<label className={"input-label "+(this.state.erEmail ? "" : "hide")}>Required *</label>
