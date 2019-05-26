@@ -74,12 +74,15 @@ export default class ResearchSpaces extends Component {
 			case 'report':
 				this.setState({ showReportModal: true, report: data }, () => { this._reportModal.show() });
 				break;
+			case 'newframework':
+				try {
+					this.props.openEditFramework(false);
+				} catch(e) {
+					console.error(e);
+				}
+				break;
 			default:
 		}
-	}
-
-	listData() {
-		return this.state.topics.map(t => <ResearchTopic key={t.id} data={t} onAction={this.topicAction} />);
 	}
 
 	render() {
@@ -109,7 +112,7 @@ export default class ResearchSpaces extends Component {
 
 				<h1 className="h4 font-600 text-curious-blue mb-3">Research Spaces</h1>
 				<div className="research-spaces-list">
-					{ this.listData() }
+					{ this.state.topics.map(t => <ResearchTopic key={t.id} data={t} onAction={this.topicAction} />) }
 				</div>
 
 				{ this.state.loading ? <LoadingMask /> : null }

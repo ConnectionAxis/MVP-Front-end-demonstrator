@@ -25,12 +25,20 @@ class PinCheckbox extends Component {
 		this.checkChange = this.checkChange.bind(this);
 	}
 
+	componentDidMount() {
+		if( !Util.isEmpty(this.props.defaultChecked) ) {
+			this.setState({ check: this.props.defaultChecked });
+		}
+	}
+
 	checkChange(e) {
 		this.setState({
 			check: !this.state.check
+		}, () => {
+			if( !Util.isEmpty(this.props.onChange) ) {
+				this.props.onChange(this.state.check);
+			}
 		});
-
-		console.log('[checkChange]', this.state.check);
 	}
 
   render() {

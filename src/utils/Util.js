@@ -26,7 +26,7 @@ export default class Util {
 	}
 
 	static eachInArray(array, callback) {
-		for (var i = array.length - 1; i >= 0; i--) {
+		for (var i = 0; i < array.length; i++) {
 			if( i === 0 ) {
 				callback(array[i], i, true);
 			} else {
@@ -37,7 +37,7 @@ export default class Util {
 
 	static eachInObject(object, callback) {
 		const keys = Object.keys(object);
-		for (var i = keys.length - 1; i >= 0; i--) {
+		for (var i = 0; i < keys.length; i++) {
 			callback(keys[i], object[keys[i]]);
 		}
 	}

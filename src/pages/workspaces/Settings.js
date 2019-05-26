@@ -25,15 +25,16 @@ class Settings extends Component {
   render() {
 		return (
 			<div className="row no-gutters h-100">
-				<div className="col-lg-2 col-md-3 col-sm-12 border-right">
-					<ul className="c-tab-nav --column nav flex-column mt-3">
+				<div className="col-lg-2 col-md-3 col-sm-12">
+					<h1 className="h4 font-600 pt-3 px-3">Settings</h1>
+					<ul className="c-tab-nav --column nav flex-column">
 						<a className={"nav-link font-600 " + (this.state.active === "account" ? "active" : "")} href="#account" onClick={(e) => this.switchSettings(e, "account")}>Account settings</a>
 						<a className={"nav-link font-600 " + (this.state.active === "profile" ? "active" : "")} href="#profile" onClick={(e) => this.switchSettings(e, "profile")}>Edit Profile</a>
 						<a className={"nav-link font-600 " + (this.state.active === "claim" ? "active" : "")} href="#claim" onClick={(e) => this.switchSettings(e, "claim")}>Claim ConAx</a>
 						<a className={"nav-link font-600 " + (this.state.active === "notification" ? "active" : "")} href="#notification" onClick={(e) => this.switchSettings(e, "notification")}>Notification inbox</a>
 					</ul>
 				</div>
-				<div className="col-lg-7 col-md-6 col-sm-12 border-right pt-3 px-3">
+				<div className="col-lg-7 col-md-6 col-sm-12 pt-3 px-3 px-md-0">
 					{this.state.active === "account" &&
 						<Account />
 					}

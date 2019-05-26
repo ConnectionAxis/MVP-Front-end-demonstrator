@@ -1,15 +1,26 @@
 import React, { Component } from 'react';
 import ResearchSpaces from './Default/ResearchSpaces.js';
+import ResearchFrameworks from './Default/ResearchFrameworks.js';
+import EditFramework from './Default/EditFramework.js';
 
 export default class Default extends Component {
 	_mount = false;
 	constructor(props) {
 		super(props);
-		this.state = { active: "spaces" };
+
+		this.state = {
+			active: "spaces",
+			editFramework: false
+		};
+
+		this.openEditFramework = this.openEditFramework.bind(this);
 	}
 
 	componentDidMount() {
 		this._mount = true;
+
+		// TEST
+		this.openEditFramework(true);
 	}
 
 	componentWillUnmount() {
@@ -19,6 +30,12 @@ export default class Default extends Component {
   switchTab(e, active) {
   	e.preventDefault();
   	this.setState({ active: active });
+  }
+
+  openEditFramework(newframework) {
+  	this.setState({ editFramework: true }, () => {
+  		this._modal.show();
+  	});
   }
 
   render() {
@@ -34,14 +51,10 @@ export default class Default extends Component {
 				</div>
 				<div className="col-lg-7 col-md-6 col-sm-12 pt-3 px-3 px-md-0">
 					{this.state.active === "spaces" &&
-						<ResearchSpaces />
+						<ResearchSpaces openEditFramework={this.openEditFramework} />
 					}
 					{this.state.active === "frameworks" &&
-						<>
-							<div className="px-md-3">
-								<h1 className="h4 font-600 text-curious-blue">Frameworks</h1>
-							</div>
-						</>
+						<ResearchFrameworks openEditFramework={this.openEditFramework} />
 					}
 					{this.state.active === "call" &&
 						<>
@@ -57,6 +70,7 @@ export default class Default extends Component {
 						<p className="mb-2">Discover and create research frameworks to empower operations research, stack and share your research activities.</p>
 					</div>
 				</div>
+				{this.state.editFramework && <EditFramework ref={(modal) => {this._modal = modal;}} />}
 			</div>
 		);
 	}

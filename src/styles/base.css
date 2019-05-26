@@ -159,7 +159,6 @@ body {
 /* Social links styles */
 .social {
   display: flex;
-  justify-content: center;
 }
 
 .social-item {
@@ -403,6 +402,20 @@ div.c-nav-btn {
 	position: absolute;
 	right: 0;
 	top: 0;
+}
+
+.c-select > div[class$="-control"] {
+	border-color: var(--silver);
+	border-width: 1px !important;
+	box-shadow: none !important;
+}
+
+.c-select > div[class$="-control"]:hover {
+	border-color: var(--curious-blue);
+}
+
+.c-select div[class$="-singleValue"] {
+	color: var(--rolling-stone);
 }
 
 .conax-nav-dropdown {
