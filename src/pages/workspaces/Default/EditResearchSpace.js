@@ -8,7 +8,7 @@ import Select from 'react-select';
 import Social from '../../../components/Social.js';
 import ModalConfirm from '../../../components/ModalConfirm.js';
 
-export default class EditFramework extends Component {
+export default class EditResearchSpace extends Component {
 	constructor(props) {
 		super(props);
 
@@ -20,6 +20,10 @@ export default class EditFramework extends Component {
 			framework: "",
 			title: "",
 			erTitle: false,
+			author: "",
+			erAuthor: false,
+			institution: "",
+			erInstitution: false,
 			focusarea: "",
 			researchareas: [],
 			categoriestopics: [],
@@ -29,9 +33,6 @@ export default class EditFramework extends Component {
 
 		this.show = this.show.bind(this);
 		this.hide = this.hide.bind(this);
-
-		this.formSubmit = this.formSubmit.bind(this);
-		this.inputChange = this.inputChange.bind(this);
 	}
 
 	show() {
@@ -62,6 +63,9 @@ export default class EditFramework extends Component {
 
 		switch(field) {
 			case "title":
+			case "desc":
+			case "institution":
+			case "author":
 				value = value.target.value;
 				this.setState({ [field]: value });
 				break;
@@ -81,8 +85,8 @@ export default class EditFramework extends Component {
 					delete: true,
 					deleteConfirm: {
 						action: 'delete',
-						title: 'Delete Framework',
-						message: 'Are you sure want to delete Framework?'
+						title: 'Delete Research Space',
+						message: 'Are you sure want to delete Research Space?'
 					}
 				}, () => {
 					this.deleteModal.show();
@@ -96,55 +100,180 @@ export default class EditFramework extends Component {
 		console.log('[onDelete]', action, confirm);
 	}
 
-	formSubmit(e) {
-		e.preventDefault();
-
-	}
-
 	render() {
 		return (
 			<>
 				<Modal show={this.state.showModal} onHide={this.hide} size="lg" centered>
 					<Modal.Header closeButton>
-						<Modal.Title className="text-curious-blue font-600">Edit Framework</Modal.Title>
+						<Modal.Title className="text-curious-blue font-600">Create a new Research Space</Modal.Title>
 					</Modal.Header>
 					<Modal.Body>
 						<div className="input-form text-base p-md-4">
 							<div className="row">
 								<div className="col-md-10 offset-md-1 col-12 offset-0 mb-4">
+									{/* Owner/Institution input */}
 									<div className="form-group">
-										<h2 className="h3 font-600">Edit new framework</h2>
-										<Select
-											className="c-select"
-											value={this.state.framework}
-											onChange={v => this.inputChange('framework', v)}
-											placeholder="Select framework for edit"
-											options={[
-												{value: "Academia", label: "Academia"},
-												{value: "Enterprise", label: "Enterprise"},
-												{value: "Startup", label: "Startup", },
-												{value: "Organization/NCO", label: "Organization/NCO"}
-											]}
-										/>
+										<div className="row">
+											<div className="col-md-6 col-12">
+												<label htmlFor="rspace-author" className="font-600">Owner</label>
+												<div className="position-relative">
+													<label htmlFor="framework-title" className={"input-label "+(this.state.erAuthor ? "" : "hide")}>Required *</label>
+													<input
+														value={this.state.author}
+														onChange={ev => this.inputChange('author', ev)}
+														id="rspace-author"
+														type="text"
+														name="author"
+														placeholder="Owner"
+														className="conax-sign-input form-control" />
+												</div>
+											</div>
+											<div className="col-md-6 col-12">
+												<label htmlFor="rspace-institution" className="font-600">Institution</label>
+												<div className="position-relative">
+													<label htmlFor="framework-title" className={"input-label "+(this.state.erInstitution ? "" : "hide")}>Required *</label>
+													<input
+														value={this.state.institution}
+														onChange={ev => this.inputChange('institution', ev)}
+														id="rspace-institution"
+														type="text"
+														name="institution"
+														placeholder="Institution"
+														className="conax-sign-input form-control" />
+												</div>
+											</div>
+										</div>
 									</div>
 
-									<h2 className="h3 mb-0 font-600 text-curious-blue">Create new framework</h2>
-									<p className="p-s mb-2 text-curious-blue">A framework is a quick tool to collect and share content into your research spaces.</p>
-
+									{/* Research Space name input */}
 									<div className="form-group">
-										<label htmlFor="framework-title" className="font-600">Name of framework</label>
+										<label htmlFor="rspace-title" className="font-600">Name of Research Space</label>
 										<div className="position-relative">
 											<label htmlFor="framework-title" className={"input-label "+(this.state.erTitle ? "" : "hide")}>Required *</label>
 											<input
 												value={this.state.title}
 												onChange={ev => this.inputChange('title', ev)}
-												id="framework-title"
+												id="rspace-title"
 												type="text"
 												name="title"
-												placeholder="Framework name"
+												placeholder="Name of Research Space"
 												className="conax-sign-input form-control" />
 										</div>
 									</div>
+
+									{/* Providers radio input */}
+									<div className="form-group mb-1">
+										<div className="row align-items-center no-gutters">
+											<div className="col-4">
+												<label htmlFor="rspace-providers" className="font-600 mb-0">Providers</label>
+											</div>
+											<div className="col-8 text-right">
+												<Form.Check inline type="radio" id="rspace-providers-corporate" className="my-0">
+													<Form.Check.Input
+														name="rspace-providers"
+														type="radio"
+														defaultChecked={true}
+														onChange={e => this.inputChange("providers", e)}/>
+													<Form.Check.Label className="text-curious-blue c-link font-600" htmlFor="rspace-providers-corporate">Corporate</Form.Check.Label>
+												</Form.Check>
+												<Form.Check inline type="radio" id="rspace-providers-personal" className="my-0 ml-4 mr-0">
+													<Form.Check.Input
+														name="rspace-providers"
+														type="radio"
+														defaultChecked={false}
+														onChange={e => this.inputChange("providers", e)}/>
+													<Form.Check.Label className="text-curious-blue c-link font-600" htmlFor="rspace-providers-personal">Personal</Form.Check.Label>
+												</Form.Check>
+											</div>
+										</div>
+									</div>
+
+									<p className="p-s mb-2 text-curious-blue">You can choose the role of a content provider in your channel or project, it can be a corporate partner or a person.</p>
+
+									{/* Description textarea input */}
+									<div className="form-group">
+										<label htmlFor="rspace-desc" className="font-600">Description</label>
+										<div className="position-relative">
+											<label htmlFor="rspace-desc" className={"input-label "+(this.state.erDesc ? "" : "hide")}>Required *</label>
+											<textarea
+												value={this.state.desc}
+												onChange={ev => this.inputChange('desc', ev)}
+												id="rspace-desc"
+												type="text"
+												name="desc"
+												rows={5}
+												placeholder="Description for Research Space"
+												className="conax-sign-input form-control" />
+										</div>
+									</div>
+
+									{/* Open Source connect */}
+									<div className="form-group mb-1">
+										<label htmlFor="rspace-source"><span className="font-600">Open Source connect</span> (Optional)</label>
+										<input
+											value={this.state.source}
+											onChange={ev => this.inputChange('source', ev)}
+											id="rspace-source"
+											type="text"
+											name="source"
+											placeholder="Name of Research Space"
+											className="conax-sign-input form-control" />
+									</div>
+
+									<p className="p-s mb-3 text-curious-blue">Attach source link to your online sources or open access repositories.</p>
+
+									{/* Call to Action, Open Call action buttons */}
+									<div className="form-group">
+										<button className="c-btn c-btn-round c-btn-animated mr-3" onClick={e => this.action("call-action", e)}>Call to Action</button>
+										<button className="c-btn c-btn-round c-btn-animated" onClick={e => this.action("call-open", e)}>Open Call</button>
+									</div>
+
+									<p className="p-s mb-2 text-curious-blue">You can put a special mark as a full request for a quick search of your project to the users relevant to your sector.</p>
+
+									<h4 className="h4 mt-3 mb-2 font-600">Moderation and Success</h4>
+
+									{/* Quick Access control button */}
+									<div className="form-group">
+										<div className="row align-items-center no-gutters">
+											<div className="col-4">
+												<label htmlFor="framework-collaborators" className="mb-0">Access Control</label>
+											</div>
+											<div className="col-8 text-right">
+												<button className="c-btn c-btn-round c-btn-animated" onClick={e => this.action("access", e)}>Quick Access</button>
+											</div>
+										</div>
+									</div>
+									
+									<p className="p-s mb-2 text-curious-blue">When creating a channel or project on ConAx using the Get in function, you can set third-connections control to your research spaces or frameworks.</p>
+
+									{/* Moderators button */}
+									<div className="form-group">
+										<div className="row align-items-center no-gutters">
+											<div className="col-4">
+												<label htmlFor="framework-collaborators" className="mb-0">Moderators</label>
+											</div>
+											<div className="col-8 text-right">
+												<button className="c-btn c-btn-round c-btn-animated" onClick={e => this.action("moderators", e)}>Edit</button>
+											</div>
+										</div>
+									</div>
+
+									<h4 className="h4 mt-3 mb-2"><span className="font-600">Edit framework</span> (Optional)</h4>
+									<p className="p-s mb-2 text-curious-blue">A framework is a quick tool to collect and share content into your research spaces.</p>
+
+									{/* Name of Framework input field */}
+									<div className="form-group">
+										<label htmlFor="framework-title" className="font-600">Name of framework</label>
+										<input
+											value={this.state.title}
+											onChange={ev => this.inputChange('title', ev)}
+											id="framework-title"
+											type="text"
+											name="title"
+											placeholder="Framework name"
+											className="conax-sign-input form-control" />
+									</div>
+
 
 									<h4 className="h4 mb-0 font-600">Research stack</h4>
 									<p className="p-s mb-2 text-curious-blue">You can apply main focus areas from the one specified your profile or any other for expansion connection targeting your channel.</p>

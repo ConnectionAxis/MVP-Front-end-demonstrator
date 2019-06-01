@@ -16,9 +16,6 @@ class LoginPage extends Component {
 
 	componentDidMount() {
   	this._mount = true;
-		// <TEST>
-		// this.props.handleUser("signup");
-		// </TEST>
 	}
 
 	componentWillUnmount() {

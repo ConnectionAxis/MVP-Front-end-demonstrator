@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import ResearchSpaces from './Default/ResearchSpaces.js';
 import ResearchFrameworks from './Default/ResearchFrameworks.js';
 import EditFramework from './Default/EditFramework.js';
+import EditResearchSpace from './Default/EditResearchSpace.js';
 
 export default class Default extends Component {
 	_mount = false;
@@ -10,17 +11,19 @@ export default class Default extends Component {
 
 		this.state = {
 			active: "spaces",
-			editFramework: false
+			editFramework: false,
+			editResearchSpace: false
 		};
 
 		this.openEditFramework = this.openEditFramework.bind(this);
+		this.openEditResearchSpace = this.openEditResearchSpace.bind(this);
 	}
 
 	componentDidMount() {
 		this._mount = true;
 
 		// TEST
-		this.openEditFramework(true);
+		// this.openEditResearchSpace(true);
 	}
 
 	componentWillUnmount() {
@@ -34,7 +37,13 @@ export default class Default extends Component {
 
   openEditFramework(newframework) {
   	this.setState({ editFramework: true }, () => {
-  		this._modal.show();
+  		this.editFrameworkModal.show();
+  	});
+  }
+
+  openEditResearchSpace() {
+  	this.setState({ editResearchSpace: true }, () => {
+  		this.editResearchSpaceModal.show();
   	});
   }
 
@@ -68,9 +77,17 @@ export default class Default extends Component {
 					<div className="pt-3 px-3 px-md-0">
 						<h1 className="h4 font-600 text-curious-blue">Popular Frameworks</h1>
 						<p className="mb-2">Discover and create research frameworks to empower operations research, stack and share your research activities.</p>
+						<hr/>
+						<div className="mb-3">
+							<button className="c-btn c-btn-round c-btn-animated" onClick={this.openEditResearchSpace}>Create Research Space</button>
+						</div>
+						<div>
+							<button className="c-btn c-btn-round c-btn-animated" onClick={this.openEditFramework}>Create Framework</button>
+						</div>
 					</div>
 				</div>
-				{this.state.editFramework && <EditFramework ref={(modal) => {this._modal = modal;}} />}
+				{this.state.editFramework && <EditFramework ref={(modal) => {this.editFrameworkModal = modal;}} />}
+				{this.state.editResearchSpace && <EditResearchSpace ref={(modal) => {this.editResearchSpaceModal = modal;}} />}
 			</div>
 		);
 	}
