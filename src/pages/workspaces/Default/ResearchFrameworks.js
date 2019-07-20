@@ -10,7 +10,7 @@ export default class ResearchFrameworks extends Component {
 
 		this.state = {
 			showEmptyMessage: false,
-			loading: false,
+			loading: true,
 			frameworks: []
 		};
 
@@ -23,18 +23,10 @@ export default class ResearchFrameworks extends Component {
 
 	loadData() {
 		DataManager.getObjects(
-			'research_frameworks',
+			'frameworks',
 			[]).then(data => {
 				if( !Util.isEmpty(data) ) {
-					var frameworks = data;
-					Util.eachInArray(data, (item, i, last) => {
-						item.author.get().then(user => {
-							frameworks[i]['author'] = user.data();
-							if( last ) {
-								this.setState({ frameworks: frameworks, loading: false, showEmptyMessage: false });
-							}
-						});
-					});
+					this.setState({ frameworks: data, loading: false, showEmptyMessage: false });
 				} else {
 					console.log('[loadData] No data');
 					this.setState({ loading: false, showEmptyMessage: true });

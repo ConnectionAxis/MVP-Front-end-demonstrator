@@ -102,6 +102,15 @@ body {
 	.conax-logo-float--t { top: 0; }
 	.conax-logo-float--l { left: 0; }
 }
+.conax-avatar.round > img {
+	border-radius: 50%;
+}
+
+.conax-avatar > img {
+	width: inherit;
+	height: inherit;
+	object-fit: cover;
+}
 
 /* Hero component styles */
 .hero-card {
@@ -494,16 +503,27 @@ div.c-nav-btn {
 	background-color: rgba(var(--white-rgba), 0.5);
 }
 
-.c-loading-mask .c-loading-icon {
+.c-loading-mask .c-loading-icon,
+.c-loading-inner .c-loading-icon {
 	position: absolute;
 	left: 50%;
 	top: 50%;
+	fill: var(--curious-blue);
+  animation: c-loading-icon-spin infinite 5s linear;
+}
+
+.c-loading-mask .c-loading-icon {
 	width: 5rem;
 	height: 5rem;
 	margin-top: -2.5rem;
 	margin-left: -2.5rem;
-	fill: var(--curious-blue);
-  animation: c-loading-icon-spin infinite 5s linear;
+}
+
+.c-loading-inner .c-loading-icon {
+	width: 70%;
+	height: 70%;
+	margin-top: -35%;
+	margin-left: -35%;
 }
 
 @keyframes c-loading-icon-spin {

@@ -27,7 +27,7 @@ export default class Util {
 
 	static eachInArray(array, callback) {
 		for (var i = 0; i < array.length; i++) {
-			if( i === 0 ) {
+			if( i === array.length-1 ) {
 				callback(array[i], i, true);
 			} else {
 				callback(array[i], i, false);

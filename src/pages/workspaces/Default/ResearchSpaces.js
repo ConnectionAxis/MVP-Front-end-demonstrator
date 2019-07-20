@@ -46,15 +46,16 @@ export default class ResearchSpaces extends Component {
 			'research_topics',
 			[]).then(data => {
 				if( !Util.isEmpty(data) ) {
-					var topics = data;
-					Util.eachInArray(data, (topic, i, last) => {
-						topic.author.get().then(user => {
-							topics[i]['author'] = user.data();
-							if( last ) {
-								this.setState({ topics: topics, loading: false });
-							}
-						});
-					});
+					// var topics = data;
+					// 	topic.author.get().then(user => {
+					// 		topics[i]['author'] = user.data();
+					// 		topics[i]['preview'] = user.data()['image_profile'];
+					// 		if( last ) {
+					// 			this.setState({ topics: topics, loading: false });
+					// 		}
+					// 	});
+					// });
+					this.setState({ topics: data, loading: false });
 				} else {
 					console.log('[loadData] No data');
 					this.setState({ loading: false });

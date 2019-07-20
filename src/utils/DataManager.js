@@ -1,9 +1,12 @@
 import firebase from 'firebase/app';
 import 'firebase/firestore';
+import 'firebase/storage';
 import cookie from 'react-cookies';
 import Util from './Util';
+import format from 'string-format';
 
 let db;
+let ds;
 
 export default class DataManager {
 	static storeData(key, value) {}
@@ -80,6 +83,13 @@ export default class DataManager {
 					reject(null);
 				});
 		});
+	}
+
+	static getFileRef(collection, name) {
+		if( !ds )
+			ds = firebase.storage();
+
+		return ds.ref(format('{0}/{1}', collection, name));
 	}
 
 	static getCookieObject(name) {

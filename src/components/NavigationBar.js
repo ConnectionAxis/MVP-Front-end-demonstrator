@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import ConAxLogo from '../elements/ConAxLogo.js';
 import CNavButton from '../elements/CNavButton.js';
+import CAvatar from '../elements/CAvatar.js';
 import DataManager from '../utils/DataManager.js';
 import Util from '../utils/Util.js';
 import Dropdown from 'react-bootstrap/Dropdown';
@@ -76,6 +77,14 @@ class NavigationBar extends Component {
 		this.props.openModal(action);
 	}
 
+	renderUser() {
+		if( this.state.user.hasOwnProperty("image_profile") ) {
+			return <CAvatar width="40" height="40" type="round" file={this.state.user["image_profile"]} alt={format("{0} {1}", this.state.user.firstname, this.state.user.lastname)} onClick={(e) => this.handleAction(e, "userprofile")} className="ml-1 d-inline-block" cursor="pointer" />
+		} else {
+			return <CNavButton type="circle" icon="user" onClick={(e) => this.handleAction(e, "userprofile")} className="ml-1" />
+		}
+	}
+
 	render() {
 		return (
 			<nav className="conax-nav --top">
@@ -106,7 +115,7 @@ class NavigationBar extends Component {
 								<CNavButton type="text" text="Notifications" onClick={(e) => this.handleAction(e, "notifications")} className="ml-1 d-xl-inline-block d-none"/>
 								{/* <CNavButton type="user" text={this.state.user.name} onClick={(e) => this.handleAction(e, "user")} className="ml-1 d-sm-inline-block d-none"/> */}
 								{/* <CNavButton type="circle" icon="bell" onClick={(e) => this.handleAction(e, "notification")} className="ml-1" counter={this.state.counter}/> */}
-								<CNavButton type="circle" icon="user" onClick={(e) => this.handleAction(e, "userprofile")} className="ml-1" />
+								{this.renderUser()}
 								<Dropdown className="conax-nav-dropdown">
 									<Dropdown.Toggle variant="success" id="dropdown-basic">
 										<CNavButton type="circle" icon="dots" className="ml-2" button={false}/>

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import CNavButton from '../../../elements/CNavButton.js';
 import ConAxLogo from '../../../elements/ConAxLogo.js';
+import CAvatar from '../../../elements/CAvatar.js';
 import DataManager from '../../../utils/DataManager.js';
 import Util from '../../../utils/Util.js';
 import PopoverStickOnHover from '../../../utils/PopoverStickOnHover.js';
@@ -42,6 +43,22 @@ export default class ResearchTopic extends Component {
 		}
 	}
 
+	setAvatarPrimary() {
+		if( this.state.data.hasOwnProperty('preview') ) {
+			return <CAvatar width="60" height="60" file={this.state.data.preview} alt={this.state.data.id} />
+		} else {
+			return <ConAxLogo type="logo" width="60" />
+		}
+	}
+
+	setAvatarSecondary() {
+		if( this.state.data.hasOwnProperty('preview') ) {
+			return <CAvatar width="40" height="40" file={this.state.data.preview} alt={this.state.data.id} />
+		} else {
+			return <ConAxLogo type="logo" width="40" />
+		}
+	}
+
 	setData(data) {
 		let state = this.state.data;
 		Util.eachInObject(data, (key, value) => {
@@ -56,22 +73,22 @@ export default class ResearchTopic extends Component {
 	render() {
 		const t = this.state.data;
 		return (
-			<div className="border px-3 pt-1 pb-3 mt-1 mb-3">
+			<div className="border px-3 pt-2 pb-3 mt-1 mb-3">
 				<div className="d-flex align-items-center pt-1 pb-2">
 					<div>
-						<ConAxLogo type="logo" width="60" />
+						{this.setAvatarPrimary()}
 					</div>
 					<div className="flex-fill pl-3">
-						<h3 className="h5 font-600 my-0">{t.author.firstname} {t.author.lastname}</h3>
+						<h3 className="h5 font-600 my-0">{t.author.name}</h3>
 						<p className="mb-0">
 							<PopoverStickOnHover
 								placement="bottom"
 								className="popover-wide"
 								content={
 									<>
-										<div className="d-flex">
+										<div className="d-flex mt-1">
 											<div>
-												<ConAxLogo type="logo" width="40" />
+												{this.setAvatarSecondary()}
 											</div>
 											<div className="flex-fill pl-2">
 												<h5 className="h5 font-600 my-0">{t.author.activity}</h5>
@@ -103,9 +120,9 @@ export default class ResearchTopic extends Component {
 										</div>
 									</>
 								}>
-								<span className="text-curious-blue c-link">{t.author.activity} </span>
+								<span className="text-curious-blue c-link">{t.author.organization} </span>
 							</PopoverStickOnHover>
-							 - Startup - 5 days ago
+							 - {t.author.type} - {t.created}
 						</p>
 					</div>
 				</div>
@@ -120,9 +137,7 @@ export default class ResearchTopic extends Component {
 						className="popover-wide"
 						content={
 							<>
-								<p className="my-1"><a href="#frameworks" className="text-curious-blue c-link">Knowledge exchange- the restructure age of development of Thinks and Innovation</a></p>
-								<p className="my-1"><a href="#frameworks" className="text-curious-blue c-link">The frames for innovation policy: R&D, systems of innovation and transformative change</a></p>
-								<p className="my-1"><a href="#frameworks" className="text-curious-blue c-link">Deep transitions: Theorizing the long-term patterns of socio-technical change</a></p>
+								{ t.frameworks.map((f, i) => <p className="my-1"><a href="#frameworks" className="text-curious-blue c-link" key={i}>{f}</a></p>) }
 							</>
 						}>
 						<span className="text-curious-blue font-600 c-link mr-3">Frameworks 3</span>
@@ -134,17 +149,11 @@ export default class ResearchTopic extends Component {
 							<>
 								<p className="mb-2">
 									<span className="font-600">Categories</span>:
-									<span className="mx-1 text-curious-blue c-link">Data Mining</span>
-									<span className="mx-1 text-curious-blue c-link">Artificial Neural Networks</span>
-									<span className="mx-1 text-curious-blue c-link">Artificial Intelligence</span>
-									<span className="mx-1 text-curious-blue c-link">Machine Learning</span>
+									{ t.categories.split(",").map((c, i) => <span className="mx-1 text-curious-blue c-link" key={i}>{c.trim()}</span>) }
 								</p>
 								<p className="mb-2">
 									<span className="font-600">Topics</span>:
-									<span className="mx-1 text-curious-blue c-link">open-data</span>
-									<span className="mx-1 text-curious-blue c-link">open-source</span>
-									<span className="mx-1 text-curious-blue c-link">research-and-development</span>
-									<span className="mx-1 text-curious-blue c-link">data-driven-science</span>
+									{ t.topics.split(",").map((t, i) => <span className="mx-1 text-curious-blue c-link" key={i}>{t.trim()}</span>) }
 								</p>
 							</>
 						}>
