@@ -75,15 +75,30 @@ export default class Default extends Component {
 				</div>
 				<div className="col-lg-3 col-md-4 col-sm-12">
 					<div className="pt-3 pt-md-4 px-3 px-md-0">
-						<h1 className="h4 font-600 text-curious-blue">Popular Frameworks</h1>
-						<p className="mb-2">Discover and create research frameworks to empower operations research, stack and share your research activities.</p>
-						<hr/>
-						<div className="mb-3">
-							<button className="c-btn c-btn-round c-btn-animated" onClick={this.openEditResearchSpace}>Create Research Space</button>
-						</div>
-						<div>
-							<button className="c-btn c-btn-round c-btn-animated" onClick={this.openEditFramework}>Create Framework</button>
-						</div>
+						{this.state.active === "spaces" &&
+							<>
+								<h1 className="h4 font-600 text-curious-blue mb-4">Popular Frameworks</h1>
+								<button className="c-btn c-btn-round c-btn-animated" onClick={(e) => this.switchTab(e, "frameworks")}>Go to Explore</button>
+							</>
+						}
+						{this.state.active === "frameworks" &&
+							<>
+								<h1 className="h4 font-600 text-curious-blue">Top Rated Frameworks</h1>
+							</>
+						}
+						{this.state.active === "call" &&
+							<>
+								<h1 className="h4 font-600 text-curious-blue">Popular Frameworks</h1>
+								<p className="mb-2">Discover and create research frameworks to empower operations research, stack and share your research activities.</p>
+								<hr/>
+								<div className="mb-3">
+									<button className="c-btn c-btn-round c-btn-animated" onClick={this.openEditResearchSpace}>Create Research Space</button>
+								</div>
+								<div>
+									<button className="c-btn c-btn-round c-btn-animated" onClick={this.openEditFramework}>Create Framework</button>
+								</div>
+							</>
+						}
 					</div>
 				</div>
 				{this.state.editFramework && <EditFramework ref={(modal) => {this.editFrameworkModal = modal;}} />}

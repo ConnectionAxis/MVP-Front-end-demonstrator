@@ -53,4 +53,16 @@ export default class Util {
 
     return output.substring(0, len);
 	}
+
+	static getDaysAgo(dt) {
+		let dtn = new Date();
+		dtn.setFullYear(dt.split("/")[2]);
+		dtn.setMonth(dt.split("/")[1]);
+		dtn.setDate(dt.split("/")[0]);
+
+		let dtc = Math.round((new Date().setHours(23) - new Date(new Date().getYear()+1900, 0, 1, 0, 0, 0))/1000/60/60/24);
+		let dt2 = Math.round((dtn.setHours(23) - new Date(dtn.getYear()+1900, 0, 1, 0, 0, 0))/1000/60/60/24);
+
+		return dtc - dt2;
+	}
 }

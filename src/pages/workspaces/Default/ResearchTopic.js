@@ -6,6 +6,7 @@ import DataManager from '../../../utils/DataManager.js';
 import Util from '../../../utils/Util.js';
 import PopoverStickOnHover from '../../../utils/PopoverStickOnHover.js';
 import Dropdown from 'react-bootstrap/Dropdown';
+import format from 'string-format';
 
 export default class ResearchTopic extends Component {
 	constructor(props) {
@@ -43,17 +44,17 @@ export default class ResearchTopic extends Component {
 		}
 	}
 
-	setAvatarPrimary() {
-		if( this.state.data.hasOwnProperty('preview') ) {
-			return <CAvatar width="60" height="60" file={this.state.data.preview} alt={this.state.data.id} />
+	setAvatarPrimary(src) {
+		if( !Util.isEmpty(src) ) {
+			return <CAvatar width="60" height="60" file={src} alt={this.state.data.id} />
 		} else {
 			return <ConAxLogo type="logo" width="60" />
 		}
 	}
 
-	setAvatarSecondary() {
-		if( this.state.data.hasOwnProperty('preview') ) {
-			return <CAvatar width="40" height="40" file={this.state.data.preview} alt={this.state.data.id} />
+	setAvatarSecondary(src) {
+		if( !Util.isEmpty(src) ) {
+			return <CAvatar width="40" height="40" file={src} alt={this.state.data.id} />
 		} else {
 			return <ConAxLogo type="logo" width="40" />
 		}
@@ -70,13 +71,21 @@ export default class ResearchTopic extends Component {
 		DataManager.updateObject('research_topics', state.id, data);
 	}
 
+	getNumbers() {
+		return (Math.random(1, 256) * 100).toFixed();
+	}
+
+	getDate(dt) {
+		return format("{0} days ago", Util.getDaysAgo(dt));
+	}
+
 	render() {
 		const t = this.state.data;
 		return (
 			<div className="border px-3 pt-2 pb-3 mt-1 mb-3">
 				<div className="d-flex align-items-center pt-1 pb-2">
 					<div>
-						{this.setAvatarPrimary()}
+						{this.setAvatarPrimary(t.image_profile)}
 					</div>
 					<div className="flex-fill pl-3">
 						<h3 className="h5 font-600 my-0">{t.author.name}</h3>
@@ -88,11 +97,11 @@ export default class ResearchTopic extends Component {
 									<>
 										<div className="d-flex mt-1">
 											<div>
-												{this.setAvatarSecondary()}
+												{this.setAvatarSecondary(t.image_author)}
 											</div>
 											<div className="flex-fill pl-2">
-												<h5 className="h5 font-600 my-0">{t.author.activity}</h5>
-												<p className="p-s mt-1 mb-1">ConAx is a communicative platform to stack and share multi-modal research data. It’s a service for transformation and structural reconciliation of open research frameworks to create R&D and R&I projects.</p>
+												<h5 className="h5 font-600 my-0">{t.author.organization}</h5>
+												<p className="p-s mt-1 mb-1">{t.author.desc}</p>
 											</div>
 										</div>
 										<div className="text-center">
@@ -102,19 +111,19 @@ export default class ResearchTopic extends Component {
 											<div className="d-flex text-center">
 												<div className="flex-grow-1">
 													<p className="p-s mb-0">Connections</p>
-													<span className="h6 font-600 mb-1">21</span>
+													<span className="h6 font-600 mb-1">{this.getNumbers()}</span>
 												</div>
 												<div className="flex-grow-1">
 													<p className="p-s mb-0">Integrations</p>
-													<span className="h6 font-600 mb-1">11</span>
+													<span className="h6 font-600 mb-1">{this.getNumbers()}</span>
 												</div>
 												<div className="flex-grow-1">
 													<p className="p-s mb-0">Views</p>
-													<span className="h6 font-600 mb-1">235</span>
+													<span className="h6 font-600 mb-1">{this.getNumbers()}</span>
 												</div>
 												<div className="flex-grow-1">
 													<p className="p-s mb-0">Contributors</p>
-													<span className="h6 font-600 mb-1">123</span>
+													<span className="h6 font-600 mb-1">{this.getNumbers()}</span>
 												</div>
 											</div>
 										</div>
@@ -122,8 +131,20 @@ export default class ResearchTopic extends Component {
 								}>
 								<span className="text-curious-blue c-link">{t.author.organization} </span>
 							</PopoverStickOnHover>
-							 - {t.author.type} - {t.created}
+							 - {t.author.type} - {this.getDate(t.created)}
 						</p>
+						<div>
+							<PopoverStickOnHover
+								placement="bottom"
+								className="popover-wide"
+								content={
+									<>
+										{ t.frameworks.map((f, i) => <p className="my-1" key={i}><a href="#frameworks" className="text-curious-blue c-link">{f}</a></p>) }
+									</>
+								}>
+								<span className="text-curious-blue font-600 c-link mr-3">Frameworks {t.frameworks.length}</span>
+							</PopoverStickOnHover>
+						</div>
 					</div>
 				</div>
 				<h4 className="h5 font-600">{t.title}</h4>
@@ -132,16 +153,6 @@ export default class ResearchTopic extends Component {
 					<p>{t.caption_full}</p>
 				}
 				<div>
-					<PopoverStickOnHover
-						placement="bottom"
-						className="popover-wide"
-						content={
-							<>
-								{ t.frameworks.map((f, i) => <p className="my-1"><a href="#frameworks" className="text-curious-blue c-link" key={i}>{f}</a></p>) }
-							</>
-						}>
-						<span className="text-curious-blue font-600 c-link mr-3">Frameworks 3</span>
-					</PopoverStickOnHover>
 					<PopoverStickOnHover
 						placement="bottom"
 						className="popover-wide"
@@ -228,7 +239,7 @@ export default class ResearchTopic extends Component {
 									href="#relatedframework"
 									onClick={(e) => this.handleAction(e, "relatedframework")}
 									style={{ whiteSpace: "inherit", fontSize: "0.8rem" }}>
-									This Research space is inspired by your framework - <span className="c-link text-curious-blue">Knowledge exchange- the restructure age of development of Thinks and Innovation.</span></Dropdown.Item>
+									This Research space is inspired by your framework - <span className="c-link text-curious-blue">{t.inspired}</span></Dropdown.Item>
 							</Dropdown.Menu>
 						</Dropdown>
 					</div>
