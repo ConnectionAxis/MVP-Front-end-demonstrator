@@ -14,6 +14,7 @@ export default class Util {
 	static isEmpty(object) {
 		switch( typeof(object) ) {
 			case 'object':
+				if( object === null ) return true;
 				return Object.keys(object).length === 0;
 			case 'array':
 			case 'string':
@@ -64,5 +65,9 @@ export default class Util {
 		let dt2 = Math.round((dtn.setHours(23) - new Date(dtn.getYear()+1900, 0, 1, 0, 0, 0))/1000/60/60/24);
 
 		return dtc - dt2;
+	}
+
+	static getNumbers() {
+		return (Math.random(1, 256) * 100).toFixed();
 	}
 }

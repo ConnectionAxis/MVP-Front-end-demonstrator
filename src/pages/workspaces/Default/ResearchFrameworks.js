@@ -23,8 +23,8 @@ export default class ResearchFrameworks extends Component {
 
 	loadData() {
 		DataManager.getObjects(
-			'frameworks',
-			[]).then(data => {
+			'frameworks', [])
+			.then(data => {
 				if( !Util.isEmpty(data) ) {
 					this.setState({ frameworks: data, loading: false, showEmptyMessage: false });
 				} else {
@@ -49,7 +49,7 @@ export default class ResearchFrameworks extends Component {
 
 	render() {
 		return (
-			<div className="px-md-3">
+			<div className="px-md-4">
 				<h1 className="h4 font-600 text-curious-blue mb-3">Frameworks</h1>
 
 				{this.state.showEmptyMessage === true &&

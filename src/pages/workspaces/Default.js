@@ -3,6 +3,7 @@ import ResearchSpaces from './Default/ResearchSpaces.js';
 import ResearchFrameworks from './Default/ResearchFrameworks.js';
 import EditFramework from './Default/EditFramework.js';
 import EditResearchSpace from './Default/EditResearchSpace.js';
+import PopularFrameworks from './Default/PopularFrameworks.js';
 
 export default class Default extends Component {
 	_mount = false;
@@ -67,7 +68,7 @@ export default class Default extends Component {
 					}
 					{this.state.active === "call" &&
 						<>
-							<div className="px-md-3">
+							<div className="px-md-4">
 								<h1 className="h4 font-600 text-curious-blue">Call to action</h1>
 							</div>
 						</>
@@ -77,13 +78,15 @@ export default class Default extends Component {
 					<div className="pt-3 pt-md-4 px-3 px-md-0">
 						{this.state.active === "spaces" &&
 							<>
-								<h1 className="h4 font-600 text-curious-blue mb-4">Popular Frameworks</h1>
+								<h1 className="h4 font-600 text-curious-blue mb-3">Popular Frameworks</h1>
+								<PopularFrameworks filter={["contribuitors"]} />
 								<button className="c-btn c-btn-round c-btn-animated" onClick={(e) => this.switchTab(e, "frameworks")}>Go to Explore</button>
 							</>
 						}
 						{this.state.active === "frameworks" &&
 							<>
-								<h1 className="h4 font-600 text-curious-blue">Top Rated Frameworks</h1>
+								<h1 className="h4 font-600 text-curious-blue mb-3">Top Rated Frameworks</h1>
+								<PopularFrameworks filter={["contribuitors", "desc"]} />
 							</>
 						}
 						{this.state.active === "call" &&

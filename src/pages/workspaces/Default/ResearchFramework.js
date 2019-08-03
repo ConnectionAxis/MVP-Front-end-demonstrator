@@ -6,6 +6,7 @@ import format from 'string-format';
 import PopoverStickOnHover from '../../../utils/PopoverStickOnHover.js';
 import Dropdown from 'react-bootstrap/Dropdown';
 import CNavButton from '../../../elements/CNavButton.js';
+import { NavLink } from 'react-router-dom';
 
 export default class ResearchFramework extends Component {
 	constructor(props) {
@@ -14,6 +15,8 @@ export default class ResearchFramework extends Component {
 		this.state = {
 			data: props.data
 		};
+
+		this.handleAction = this.handleAction.bind(this);
 	}
 
 	setAvatarPrimary(src) {
@@ -23,6 +26,12 @@ export default class ResearchFramework extends Component {
 			return <ConAxLogo type="logo" width="60" />
 		}
 	}
+
+  handleAction(e, action) {
+  	e.preventDefault();
+
+  	console.log('[ResearchFramework:handleAction]', action);
+  }
 
 	getDate(dt) {
 		return format("{0} days ago", Util.getDaysAgo(dt));
@@ -37,7 +46,7 @@ export default class ResearchFramework extends Component {
 						{this.setAvatarPrimary(t.id)}
 					</div>
 					<div className="flex-fill pl-3">
-						<h3 className="h5 font-600 my-0">{t.title}</h3>
+						<h3 className="h5 font-600 mt-0 mb-2"><NavLink to={"/framework?id="+t.id} className="c-link">{t.title}</NavLink></h3>
 						<p className="my-0">
 							uploaded by <span className="c-link text-curious-blue">{t.author.name}</span> at {t.author.organization} - {this.getDate(t.created)}
 						</p>
@@ -151,7 +160,7 @@ export default class ResearchFramework extends Component {
 										href="#relatedframework"
 										onClick={(e) => this.handleAction(e, "relatedframework")}
 										style={{ whiteSpace: "inherit", fontSize: "0.8rem" }}>
-										This framework is inspired by your  Frameworks - <span className="c-link text-curious-blue">{t.inspired_framework}</span></Dropdown.Item> : null }
+										This framework is inspired by your Frameworks - <span className="c-link text-curious-blue">{t.inspired_framework}</span></Dropdown.Item> : null }
 							</Dropdown.Menu>
 						</Dropdown>
 					</div>

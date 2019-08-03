@@ -15,7 +15,32 @@ export default class DataManager {
 		return 'getData';
 	}
 
-	static getObjects(collection, condition) {
+	static getObject(collection, id) {
+		if( !db )
+			db = firebase.firestore();
+
+		return new Promise((resolve, reject) => {
+    	var connection = db.collection(collection);
+
+    	connection
+    		.doc(id)
+    		.get()
+    		.then((data) => {
+    			if( !Util.isEmpty(data.data()) ) {
+    				let output = data.data();
+    				output['id'] = id;
+    				resolve(output);
+    			} else {
+    				reject(null);
+    			}
+    		})
+    		.catch((error) => {
+    			reject(null);
+    		})
+		});
+	}
+
+	static getObjects(collection, condition, limit, order) {
 		if( !db )
 			db = firebase.firestore();
 
@@ -30,6 +55,16 @@ export default class DataManager {
 
     		if( !query )
     			query = connection;
+    	}
+
+    	if( limit )
+    		query = query.limit(limit);
+
+    	if( order ) {
+    		if( order.length > 1 )
+    			query = query.orderBy(order[0], order[1])
+    		else
+    			query = query.orderBy(order[0])
     	}
 
 	    query

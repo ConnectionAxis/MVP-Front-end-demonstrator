@@ -7,6 +7,7 @@ import Util from '../../../utils/Util.js';
 import PopoverStickOnHover from '../../../utils/PopoverStickOnHover.js';
 import Dropdown from 'react-bootstrap/Dropdown';
 import format from 'string-format';
+import { NavLink } from 'react-router-dom';
 
 export default class ResearchTopic extends Component {
 	constructor(props) {
@@ -71,10 +72,6 @@ export default class ResearchTopic extends Component {
 		DataManager.updateObject('research_topics', state.id, data);
 	}
 
-	getNumbers() {
-		return (Math.random(1, 256) * 100).toFixed();
-	}
-
 	getDate(dt) {
 		return format("{0} days ago", Util.getDaysAgo(dt));
 	}
@@ -111,19 +108,19 @@ export default class ResearchTopic extends Component {
 											<div className="d-flex text-center">
 												<div className="flex-grow-1">
 													<p className="p-s mb-0">Connections</p>
-													<span className="h6 font-600 mb-1">{this.getNumbers()}</span>
+													<span className="h6 font-600 mb-1">{Util.getNumbers()}</span>
 												</div>
 												<div className="flex-grow-1">
 													<p className="p-s mb-0">Integrations</p>
-													<span className="h6 font-600 mb-1">{this.getNumbers()}</span>
+													<span className="h6 font-600 mb-1">{Util.getNumbers()}</span>
 												</div>
 												<div className="flex-grow-1">
 													<p className="p-s mb-0">Views</p>
-													<span className="h6 font-600 mb-1">{this.getNumbers()}</span>
+													<span className="h6 font-600 mb-1">{Util.getNumbers()}</span>
 												</div>
 												<div className="flex-grow-1">
 													<p className="p-s mb-0">Contributors</p>
-													<span className="h6 font-600 mb-1">{this.getNumbers()}</span>
+													<span className="h6 font-600 mb-1">{Util.getNumbers()}</span>
 												</div>
 											</div>
 										</div>
@@ -147,7 +144,7 @@ export default class ResearchTopic extends Component {
 						</div>
 					</div>
 				</div>
-				<h4 className="h5 font-600">{t.title}</h4>
+				<h4 className="h5 font-600"><NavLink to={"/research?id="+t.id} className="c-link">{t.title}</NavLink></h4>
 				<p className="mb-1">{t.caption} { !this.state.full && <a href="#show" className="text-curious-blue c-link" onClick={this.showMore}>Show more..</a> }</p>
 				{ this.state.full &&
 					<p>{t.caption_full}</p>
@@ -195,8 +192,7 @@ export default class ResearchTopic extends Component {
 								style={{ minWidth: "250px", maxWidth: "300px" }}>
 								<Dropdown.Item
 									className="text-curious-blue px-3 border-bottom d-block"
-									href="#getin"
-									onClick={(e) => this.handleAction(e, "getin")}>
+									href={"/conax-tool/research?id="+t.id}>
 									Get in</Dropdown.Item>
 								<Dropdown.Item
 									className="text-curious-blue px-3 border-bottom d-block"

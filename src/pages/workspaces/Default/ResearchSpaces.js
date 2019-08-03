@@ -43,8 +43,8 @@ export default class ResearchSpaces extends Component {
 
 	loadData() {
 		DataManager.getObjects(
-			'research_topics',
-			[]).then(data => {
+			'research_topics', [])
+			.then(data => {
 				if( !Util.isEmpty(data) ) {
 					this.setState({ topics: data, loading: false });
 				} else {
@@ -79,7 +79,7 @@ export default class ResearchSpaces extends Component {
 
 	render() {
 		return (
-			<div className="px-md-3">
+			<div className="px-md-4">
 				{this.state.showbadge === true &&
 					<>
 						<div className="jumbotron mb-3 py-4 text-center position-relative">

@@ -6,6 +6,7 @@ import DataManager from '../utils/DataManager.js';
 import Util from '../utils/Util.js';
 import Dropdown from 'react-bootstrap/Dropdown';
 import format from 'string-format';
+import { NavLink } from 'react-router-dom';
 
 class NavigationBar extends Component {
 	_mount = false;
@@ -74,12 +75,25 @@ class NavigationBar extends Component {
 
 	handleAction(e, action) {
 		e.preventDefault();
-		this.props.openModal(action);
+
+		if( this.props.hasOwnProperty('openModal') )
+			this.props.openModal(action);
+		else
+			console.log('[NavigationBar:handleAction]', action);
 	}
 
 	renderUser() {
 		if( this.state.user.hasOwnProperty("image_profile") ) {
-			return <CAvatar width="40" height="40" type="round" file={this.state.user["image_profile"]} alt={format("{0} {1}", this.state.user.firstname, this.state.user.lastname)} onClick={(e) => this.handleAction(e, "userprofile")} className="ml-1 d-inline-block" cursor="pointer" />
+			return <NavLink to={"/userprofile?id="+this.state.user.id}>
+					<CAvatar
+						width="40"
+						height="40"
+						type="round"
+						file={this.state.user["image_profile"]}
+						alt={format("{0} {1}", this.state.user.firstname, this.state.user.lastname)}
+						className="ml-1 d-inline-block"
+						cursor="pointer" />
+				</NavLink>
 		} else {
 			return <CNavButton type="circle" icon="user" onClick={(e) => this.handleAction(e, "userprofile")} className="ml-1" />
 		}
@@ -90,7 +104,7 @@ class NavigationBar extends Component {
 			<nav className="conax-nav --top">
 				<div className="container py-2 px-0">
 					<div className="d-flex no-gutters align-items-center px-3">
-						<div className="">
+						<div>
 							<div className="mr-2 d-sm-inline-block d-xl-none">
 								<ConAxLogo type="logo" width="42" cursor="pointer" onClick={(e) => this.handleMenu(e, "default")}/>
 							</div>
