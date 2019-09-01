@@ -21,9 +21,9 @@ export default class ResearchFramework extends Component {
 
 	setAvatarPrimary(src) {
 		if( !Util.isEmpty(src) ) {
-			return <CAvatar width="60" height="60" file={format("{0}.png", src)} alt={this.state.data.id} />
+			return <CAvatar width="100" height="100" file={format("{0}.png", src)} alt={this.state.data.id} />
 		} else {
-			return <ConAxLogo type="logo" width="60" />
+			return <ConAxLogo type="logo" width="100" />
 		}
 	}
 

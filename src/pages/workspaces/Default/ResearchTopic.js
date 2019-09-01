@@ -22,12 +22,13 @@ export default class ResearchTopic extends Component {
 		this.handleAction = this.handleAction.bind(this);
 	}
 
-	showMore(e) {
+	showMore(e, value) {
 		e.preventDefault();
-		this.setState({ full: true });
 
-		let views = this.state.data.views;
-		this.setData({ views: ++views });
+		this.setState({ full: value }, () => {
+			let views = this.state.data.views;
+			this.setData({ views: ++views });
+		});
 	}
 
 	handleAction(e, action) {
@@ -47,9 +48,9 @@ export default class ResearchTopic extends Component {
 
 	setAvatarPrimary(src) {
 		if( !Util.isEmpty(src) ) {
-			return <CAvatar width="60" height="60" file={src} alt={this.state.data.id} />
+			return <CAvatar width="100" height="100" file={src} alt={this.state.data.id} />
 		} else {
-			return <ConAxLogo type="logo" width="60" />
+			return <ConAxLogo type="logo" width="100" />
 		}
 	}
 
@@ -145,9 +146,9 @@ export default class ResearchTopic extends Component {
 					</div>
 				</div>
 				<h4 className="h5 font-600"><NavLink to={"/research?id="+t.id} className="c-link">{t.title}</NavLink></h4>
-				<p className="mb-1">{t.caption} { !this.state.full && <a href="#show" className="text-curious-blue c-link" onClick={this.showMore}>Show more..</a> }</p>
+				<p className="mb-1">{t.caption} { !this.state.full && <a href="#show" className="text-curious-blue c-link" onClick={(e) => this.showMore(e, true)}>Show more</a> }</p>
 				{ this.state.full &&
-					<p>{t.caption_full}</p>
+					<p>{t.caption_full} <a href="#show" className="text-curious-blue c-link" onClick={(e) => this.showMore(e, false)}>Show less</a></p>
 				}
 				<div>
 					<PopoverStickOnHover

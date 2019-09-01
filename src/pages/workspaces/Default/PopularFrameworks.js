@@ -14,6 +14,7 @@ export default class PopularFrameworks extends Component {
 
 		this.state = {
 			loading: true,
+			filter: null,
 			data: []
 		}
 	}
@@ -21,10 +22,25 @@ export default class PopularFrameworks extends Component {
   componentDidMount() {
   	this._mount = true;
 
-  	let order = null;
+  	if( this.props.hasOwnProperty('filter') ) {
+  		this.setState({ filter: this.props.filter }, this.loadData)
+  	} else {
+  		this.loadData();
+  	}
+	}
 
-  	if( this.props.hasOwnProperty('filter') )
-  		order = this.props.filter;
+  componentWillUnmount() {
+  	this._mount = false;
+	}
+
+	componentWillReceiveProps(newProps) {
+		if( newProps.hasOwnProperty('filter') ) {
+			this.setState({ loading: true, filter: newProps.filter }, this.loadData);
+		}
+	}
+
+	loadData() {
+		let order = this.state.filter;
 
   	DataManager.getObjects(
   		'frameworks', [], 2, order)
@@ -39,10 +55,6 @@ export default class PopularFrameworks extends Component {
 				console.log('[loadData] Error');
 				this.setState({ loading: false });
 			})
-	}
-
-  componentWillUnmount() {
-  	this._mount = false;
 	}
 
 	getDate(dt) {

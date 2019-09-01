@@ -115,24 +115,22 @@ class NavigationBar extends Component {
 						{this.full ? (
 							<>
 							<div className="flex-fill">
-								<div className="form-group mb-0">
+								<CNavButton type="text" text="Targeting & Analytics" onClick={(e) => this.handleAction(e, "targeting&analytics")} className="ml-1 d-xl-inline-block d-none"/>
+								<CNavButton type="text" text="Creative Networks" onClick={(e) => this.handleAction(e, "creative-networks")} className="ml-1 d-xl-inline-block d-none"/>
+								<CNavButton type="text" text="Notifications" onClick={(e) => this.handleAction(e, "notifications")} className="ml-1 d-xl-inline-block d-none"/>
+							</div>
+							<div className="flex-fill text-right" style={{ minWidth: "100px" }}>
+								<div className="form-group d-inline-flex mb-0 mr-md-4 mr-2">
 									<input
 										id="conax-search-input"
 										type="text"
 										placeholder="Search"
 										className="form-control" />
 								</div>
-							</div>
-							<div className="flex-fill text-right" style={{ minWidth: "100px" }}>
-								<CNavButton type="text" text="Targeting & Analytics" onClick={(e) => this.handleAction(e, "targeting&analytics")} className="ml-1 d-xl-inline-block d-none"/>
-								<CNavButton type="text" text="Creative Networks" onClick={(e) => this.handleAction(e, "creative-networks")} className="ml-1 d-xl-inline-block d-none"/>
-								<CNavButton type="text" text="Notifications" onClick={(e) => this.handleAction(e, "notifications")} className="ml-1 d-xl-inline-block d-none"/>
-								{/* <CNavButton type="user" text={this.state.user.name} onClick={(e) => this.handleAction(e, "user")} className="ml-1 d-sm-inline-block d-none"/> */}
-								{/* <CNavButton type="circle" icon="bell" onClick={(e) => this.handleAction(e, "notification")} className="ml-1" counter={this.state.counter}/> */}
 								{this.renderUser()}
 								<Dropdown className="conax-nav-dropdown">
 									<Dropdown.Toggle variant="success" id="dropdown-basic">
-										<CNavButton type="circle" icon="dots" className="ml-2" button={false}/>
+										<CNavButton type="circle" icon="dots" className="ml-md-3 ml-2" button={false}/>
 									</Dropdown.Toggle>
 									<Dropdown.Menu alignRight className="mt-3">
 										<Dropdown.Item className="font-600 py-2 d-block d-md-none" href="#new-project" onClick={(e) => this.handleAction(e, "user")}>{this.state.user.name}</Dropdown.Item>

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Dropdown from 'react-bootstrap/Dropdown';
 import ResearchSpaces from './Default/ResearchSpaces.js';
 import ResearchFrameworks from './Default/ResearchFrameworks.js';
 import EditFramework from './Default/EditFramework.js';
@@ -12,12 +13,15 @@ export default class Default extends Component {
 
 		this.state = {
 			active: "spaces",
+			frameworks: "Related",
+			frameworksFilter: ["contribuitors"],
 			editFramework: false,
 			editResearchSpace: false
 		};
 
 		this.openEditFramework = this.openEditFramework.bind(this);
 		this.openEditResearchSpace = this.openEditResearchSpace.bind(this);
+		this.switchFrameworks = this.switchFrameworks.bind(this);
 	}
 
 	componentDidMount() {
@@ -46,6 +50,12 @@ export default class Default extends Component {
   	this.setState({ editResearchSpace: true }, () => {
   		this.editResearchSpaceModal.show();
   	});
+  }
+
+  switchFrameworks(e, value) {
+  	e.preventDefault();
+
+  	this.setState({ frameworks: value, frameworksFilter: (value === 'Related') ? ['contribuitors'] : ['contribuitors', 'desc'] });
   }
 
   render() {
@@ -78,9 +88,24 @@ export default class Default extends Component {
 					<div className="pt-3 pt-md-4 px-3 px-md-0">
 						{this.state.active === "spaces" &&
 							<>
-								<h1 className="h4 font-600 text-curious-blue mb-3">Popular Frameworks</h1>
-								<PopularFrameworks filter={["contribuitors"]} />
-								<button className="c-btn c-btn-round c-btn-animated" onClick={(e) => this.switchTab(e, "frameworks")}>Go to Explore</button>
+								<div className="d-flex flex-row align-items-center mb-3">
+									<div className="flex-fill">
+										<h1 className="h4 font-600 text-curious-blue">Frameworks</h1>
+									</div>
+									<div>
+										<Dropdown className="conax-nav-dropdown">
+											<Dropdown.Toggle>
+												<div className="p-m text-base font-600">{this.state.frameworks}</div>
+											</Dropdown.Toggle>
+											<Dropdown.Menu alignRight className="mt-1">
+												<Dropdown.Item className="font-600 py-2 d-block" href="#" onClick={(e) => this.switchFrameworks(e, "Related")}>Related</Dropdown.Item>
+												<Dropdown.Item className="font-600 py-2 d-block" href="#" onClick={(e) => this.switchFrameworks(e, "Popular")}>Popular</Dropdown.Item>
+											</Dropdown.Menu>
+										</Dropdown>
+									</div>
+								</div>
+								<PopularFrameworks filter={this.state.frameworksFilter} />
+								<button className="c-btn c-btn-round c-btn-default mb-4" onClick={(e) => this.switchTab(e, "frameworks")}>Go to Explore</button>
 							</>
 						}
 						{this.state.active === "frameworks" &&
