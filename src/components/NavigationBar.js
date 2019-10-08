@@ -104,7 +104,7 @@ class NavigationBar extends Component {
 			<nav className="conax-nav --top">
 				<div className="container py-2 px-0">
 					<div className="d-flex no-gutters align-items-center px-3">
-						<div>
+						<div className="col-lg-2 col-md-3 col-sm-12">
 							<div className="mr-2 d-sm-inline-block d-xl-none">
 								<ConAxLogo type="logo" width="42" cursor="pointer" onClick={(e) => this.handleMenu(e, "default")}/>
 							</div>
