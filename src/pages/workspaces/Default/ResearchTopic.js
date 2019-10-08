@@ -193,7 +193,7 @@ export default class ResearchTopic extends Component {
 								style={{ minWidth: "250px", maxWidth: "300px" }}>
 								<Dropdown.Item
 									className="text-curious-blue px-3 border-bottom d-block"
-									href={"/conax-tool/research?id="+t.id}>
+									href={"/research?id="+t.id}>
 									Get in</Dropdown.Item>
 								<Dropdown.Item
 									className="text-curious-blue px-3 border-bottom d-block"

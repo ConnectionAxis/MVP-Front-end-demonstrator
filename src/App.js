@@ -112,7 +112,7 @@ class App extends Component {
 
   render() {
     return (
-      <Router basename={'/conax-tool'}>
+      <Router>
         <Switch>
           <Route path="/" exact component={this.defaultPath}/>
           <Route path="/privacy" exact component={this.staticPage}/>

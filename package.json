@@ -30,6 +30,6 @@
     "not ie <= 11",
     "not op_mini all"
   ],
-  "homepage": "https://popovich.000webhostapp.com/conax-tool/",
+  "homepage": "http://conax.rf.gd/",
   "devDependencies": {}
 }
