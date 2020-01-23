@@ -33,5 +33,7 @@
     "not op_mini all"
   ],
   "homepage": "https://connectionaxis.github.io/mvp",
-  "devDependencies": {}
+  "devDependencies": {
+    "gh-pages": "^2.2.0"
+  }
 }
