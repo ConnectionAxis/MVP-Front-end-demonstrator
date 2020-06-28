@@ -20,17 +20,17 @@ export default class PopularFrameworks extends Component {
 	}
 
   componentDidMount() {
-  	this._mount = true;
+	this._mount = true;
 
-  	if( this.props.hasOwnProperty('filter') ) {
-  		this.setState({ filter: this.props.filter }, this.loadData)
-  	} else {
-  		this.loadData();
-  	}
+	if( this.props.hasOwnProperty('filter') ) {
+		this.setState({ filter: this.props.filter }, this.loadData)
+	} else {
+		this.loadData();
+	}
 	}
 
   componentWillUnmount() {
-  	this._mount = false;
+	this._mount = false;
 	}
 
 	componentWillReceiveProps(newProps) {
@@ -42,16 +42,16 @@ export default class PopularFrameworks extends Component {
 	loadData() {
 		let order = this.state.filter;
 
-  	DataManager.getObjects(
-  		'frameworks', [], 2, order)
-  		.then(data => {
-  			if( !Util.isEmpty(data) ) {
+	DataManager.getObjects(
+		'frameworks', [], 2, order)
+		.then(data => {
+			if( !Util.isEmpty(data) ) {
 					this.setState({ data: data, loading: false });
 				} else {
 					console.log('[loadData] No data');
 					this.setState({ loading: false });
 				}
-  		}, error => {
+		}, error => {
 				console.log('[loadData] Error');
 				this.setState({ loading: false });
 			})
@@ -80,7 +80,7 @@ export default class PopularFrameworks extends Component {
 							<p className="my-0 p-s">
 								uploaded by <span className="c-link text-curious-blue">{f.author.name}</span> at {f.author.organization} - {this.getDate(f.created)}
 							</p>
-							<p className="my-0 p-s">at Research space - <span className="c-link text-curious-blue">{f.research}</span></p>
+							<p className="my-0 p-s">at Research space - <NavLink className="c-link" to={"/research?id="+f.research_ref}>{f.research}</NavLink></p>
 							<div className="mt-1">
 								<PopoverStickOnHover
 									placement="bottom"

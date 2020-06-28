@@ -52,7 +52,6 @@ export default class ResearchSpaces extends Component {
 					if( this.state.show !== 'All' ) {
 						data = data.filter(i => i.views >= 40);
 					}
-
 					this.setState({ topics: data, loading: false });
 				} else {
 					console.log('[loadData] No data');

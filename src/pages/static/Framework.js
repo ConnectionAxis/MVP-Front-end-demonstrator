@@ -24,8 +24,7 @@ export default class Framework extends Component {
 				areas_focus: '',
 				categories: '',
 				topics: '',
-				inspired_research: '',
-				inspired_framework: ''
+				inspired: []
 			}
 		}
 
@@ -33,29 +32,29 @@ export default class Framework extends Component {
 	}
 
   componentDidMount() {
-  	this._mount = true;
-  	if( !Util.isEmpty(this.props.id) ) {
-  		DataManager.getObject(
-  			'frameworks', this.props.id)
-  			.then(data => {
-  				console.log(data);
-  				this.setState({ data: data, loading: false, error: false });
-  			}, error => {
-  				this.setState({ error: true, loading: false });
-  			})
-  	} else {
-  		this.setState({ error: true, loading: false });
-  	}
+	this._mount = true;
+	if( !Util.isEmpty(this.props.id) ) {
+		DataManager.getObject(
+			'frameworks', this.props.id)
+			.then(data => {
+				console.log(data);
+				this.setState({ data: data, loading: false, error: false });
+			}, error => {
+				this.setState({ error: true, loading: false });
+			})
+	} else {
+		this.setState({ error: true, loading: false });
+	}
 	}
 
   componentWillUnmount() {
-  	this._mount = false;
+	this._mount = false;
   }
 
   handleAction(e, action) {
-  	e.preventDefault();
+	e.preventDefault();
 
-  	console.log('[Framework:handleAction]', action);
+	console.log('[Framework:handleAction]', action);
   }
 
 	getDate(dt) {
@@ -70,7 +69,7 @@ export default class Framework extends Component {
 		return (
 			<>
 				<NavigationBar
-          staticPage={false}
+		  staticPage={false}
 					switchPath={this.props.switchPath} />
 				<div className={`workspace --with-nav d-flex ${( this.state.error ) ? "align-items-center justify-content-center flex-column" : ""}`}>
 					{ !this.state.error ?
@@ -107,7 +106,7 @@ export default class Framework extends Component {
 									<p className="my-0">
 										uploaded by <span className="c-link text-curious-blue">{t.author.name}</span> at {t.author.organization} - {this.getDate(t.created)}
 									</p>
-									<p className="my-0">at Research space - <span className="c-link text-curious-blue">{t.research}</span></p>
+									<p className="my-0">at Research space - <NavLink className="c-link" to={"/research?id="+t.research_ref}>{t.research}</NavLink></p>
 									<div className="d-flex no-gutters align-items-center my-3">
 										<div className="flex-fill">
 											<div className="form-group my-0">
@@ -168,12 +167,15 @@ export default class Framework extends Component {
 								</div>
 
 								<div className="col-lg-3 col-md-4 pt-3 pt-md-4 pb-4 col-sm-12 px-3 px-md-0">
-									{ t.inspired_research.length > 0 ?
-										<p>This framework is inspired by your Research space - <span className="c-link text-curious-blue">{t.inspired_research}</span></p> : null
-									}
-									{ t.inspired_framework.length > 0 ?
-										<p>This framework is inspired by your Frameworks - <span className="c-link text-curious-blue">{t.inspired_framework}</span></p> : null
-									}
+									{ t.inspired.map((inspire, i) => {
+										let collection = '';
+										if( inspire.collection === 'research' )
+											collection = 'Research space';
+										if( inspire.collection === 'framework' )
+											collection = 'Framework';
+
+										return <p>This framework is inspired by your {collection} - <NavLink className="c-link" to={"/"+inspire.collection+"?id="+inspire.ref}>{inspire.title}</NavLink></p>
+									}) }
 								</div>
 							</div>
 						</div>

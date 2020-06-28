@@ -83,7 +83,9 @@ export default class PopoverStickOnHover extends React.Component {
             onMouseLeave={this.handleMouseLeave}
             id='popover'
           >
-            {content}
+            <Popover.Content>
+              {content}
+            </Popover.Content>
           </Popover>
         </Overlay>
       </React.Fragment>

@@ -50,7 +50,7 @@ export default class ResearchFramework extends Component {
 						<p className="my-0">
 							uploaded by <span className="c-link text-curious-blue">{t.author.name}</span> at {t.author.organization} - {this.getDate(t.created)}
 						</p>
-						<p className="my-0">at Research space - <span className="c-link text-curious-blue">{t.research}</span></p>
+						<p className="my-0">at Research space - <NavLink className="c-link" to={"/research?id="+t.research_ref}>{t.research}</NavLink></p>
 					</div>
 				</div>
 				<div>
@@ -147,20 +147,21 @@ export default class ResearchFramework extends Component {
 									href="#notify"
 									onClick={(e) => this.handleAction(e, "notify")}>
 									Notify about edits</Dropdown.Item>
-								{ t.inspired_research.length > 0 ?
-									<Dropdown.Item
+								{ t.inspired.map((inspire, i) => {
+									let collection = '';
+									if( inspire.collection === 'research' )
+										collection = 'Research space';
+									if( inspire.collection === 'framework' )
+										collection = 'Framework';
+
+									return 	<Dropdown.Item
+										key={inspire.ref}
 										className="px-3 border-bottom d-block"
-										href="#relatedresearch"
-										onClick={(e) => this.handleAction(e, "relatedresearch")}
+										href={"/"+inspire.collection+"?id="+inspire.ref}
 										style={{ whiteSpace: "inherit", fontSize: "0.8rem" }}>
-										This framework is inspired by your Research space - <span className="c-link text-curious-blue">{t.inspired_research}</span></Dropdown.Item> : null }
-								{ t.inspired_framework.length > 0 ?
-									<Dropdown.Item
-										className="px-3 border-bottom d-block"
-										href="#relatedframework"
-										onClick={(e) => this.handleAction(e, "relatedframework")}
-										style={{ whiteSpace: "inherit", fontSize: "0.8rem" }}>
-										This framework is inspired by your Frameworks - <span className="c-link text-curious-blue">{t.inspired_framework}</span></Dropdown.Item> : null }
+											This framework is inspired by your {collection} - <NavLink className="c-link" to={"/"+inspire.collection+"?id="+inspire.ref}>{inspire.title}</NavLink>
+										</Dropdown.Item>;
+								}) }
 							</Dropdown.Menu>
 						</Dropdown>
 					</div>

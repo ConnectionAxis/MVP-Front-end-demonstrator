@@ -137,7 +137,8 @@ export default class ResearchTopic extends Component {
 								className="popover-wide"
 								content={
 									<>
-										{ t.frameworks.map((f, i) => <p className="my-1" key={i}><a href="#frameworks" className="text-curious-blue c-link">{f}</a></p>) }
+										{ t.frameworks.map((f, i) =>
+											<p className="my-1" key={i}><NavLink className="c-link" to={"/framework?id="+f.ref}>{f.title}</NavLink></p>) }
 									</>
 								}>
 								<span className="text-curious-blue font-600 c-link mr-3">Frameworks {t.frameworks.length}</span>
@@ -231,12 +232,21 @@ export default class ResearchTopic extends Component {
 									onClick={(e) => this.handleAction(e, "guidelines")}
 									style={{ whiteSpace: "inherit", fontSize: "0.8rem" }}>
 									This goes against <span className="c-link text-curious-blue">ConAx</span> community guidelines</Dropdown.Item>
-								<Dropdown.Item
-									className="px-3 border-bottom d-block"
-									href="#relatedframework"
-									onClick={(e) => this.handleAction(e, "relatedframework")}
-									style={{ whiteSpace: "inherit", fontSize: "0.8rem" }}>
-									This Research space is inspired by your framework - <span className="c-link text-curious-blue">{t.inspired}</span></Dropdown.Item>
+								{ t.inspired.map((inspire, i) => {
+									let collection = '';
+									if( inspire.collection === 'research' )
+										collection = 'Research space';
+									if( inspire.collection === 'framework' )
+										collection = 'Framework';
+
+									return 	<Dropdown.Item
+										key={inspire.ref}
+										className="px-3 border-bottom d-block"
+										href={"/"+inspire.collection+"?id="+inspire.ref}
+										style={{ whiteSpace: "inherit", fontSize: "0.8rem" }}>
+											This Research space is inspired by your {collection} - <NavLink className="c-link" to={"/"+inspire.collection+"?id="+inspire.ref}>{inspire.title}</NavLink>
+										</Dropdown.Item>;
+								}) }
 							</Dropdown.Menu>
 						</Dropdown>
 					</div>

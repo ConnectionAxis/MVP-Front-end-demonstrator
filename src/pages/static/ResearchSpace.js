@@ -20,6 +20,7 @@ export default class ResearchSpace extends Component {
 			error: false,
 			data: {
 				author: {},
+				inspired: [],
 				frameworks: [],
 				categories: '',
 				topics: ''
@@ -30,18 +31,18 @@ export default class ResearchSpace extends Component {
 	}
 
   componentDidMount() {
-  	this._mount = true;
-  	if( !Util.isEmpty(this.props.id) ) {
-  		DataManager.getObject(
-  			'research_topics', this.props.id)
-  			.then(data => {
-  				this.setState({ data: data, loading: false, error: false });
-  			}, error => {
-  				this.setState({ error: true, loading: false });
-  			})
-  	} else {
-  		this.setState({ error: true, loading: false });
-  	}
+	this._mount = true;
+	if( !Util.isEmpty(this.props.id) ) {
+		DataManager.getObject(
+			'research_topics', this.props.id)
+			.then(data => {
+				this.setState({ data: data, loading: false, error: false });
+			}, error => {
+				this.setState({ error: true, loading: false });
+			})
+	} else {
+		this.setState({ error: true, loading: false });
+	}
 	}
 
 	getDate(dt) {
@@ -52,13 +53,13 @@ export default class ResearchSpace extends Component {
 	}
 
   componentWillUnmount() {
-  	this._mount = false;
+	this._mount = false;
   }
 
   handleAction(e, action) {
-  	e.preventDefault();
+	e.preventDefault();
 
-  	console.log('[ResearchSpace:handleAction]', action);
+	console.log('[ResearchSpace:handleAction]', action);
   }
 
 	render() {
@@ -66,7 +67,7 @@ export default class ResearchSpace extends Component {
 		return (
 			<>
 				<NavigationBar
-          staticPage={false}
+		  staticPage={false}
 					switchPath={this.props.switchPath} />
 				<div className={`workspace --with-nav d-flex ${( this.state.error ) ? "align-items-center justify-content-center flex-column" : ""}`}>
 					{ !this.state.error ?
@@ -81,7 +82,7 @@ export default class ResearchSpace extends Component {
 
 									<p className="h6 font-600 mt-3">Frameworks:</p>
 									<ul className="pl-3">
-										{ t.frameworks.map((f, i) => <li className="my-1 p-s" key={i}><a href="#frameworks" className="text-curious-blue c-link">{f}</a></li>) }
+										{ t.frameworks.map((f, i) => <li className="my-1 p-s" key={i}><NavLink className="c-link" to={"/framework?id="+f.ref}>{f.title}</NavLink></li>) }
 									</ul>
 
 									<p className="h6 font-600">Categories:</p>
@@ -205,7 +206,15 @@ export default class ResearchSpace extends Component {
 									</div>
 
 									<div className="my-3">
-										<p>This Research space is inspired by your framework - <span className="c-link text-curious-blue">{t.inspired}</span></p>
+										{ t.inspired.map((inspire, i) => {
+											let collection = '';
+											if( inspire.collection === 'research' )
+												collection = 'Research space';
+											if( inspire.collection === 'framework' )
+												collection = 'Framework';
+
+											return <p>This Research space is inspired by your {collection} - <NavLink className="c-link" to={"/"+inspire.collection+"?id="+inspire.ref}>{inspire.title}</NavLink></p>
+										}) }
 									</div>
 								</div>
 							</div>
