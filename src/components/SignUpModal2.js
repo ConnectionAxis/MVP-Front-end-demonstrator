@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import Util from '../utils/Util.js';
 // import ConAxLogo from '../elements/ConAxLogo.js';
 import Modal from 'react-bootstrap/Modal';
-import Overlay from 'react-bootstrap/Overlay';
 import Popover from 'react-bootstrap/Popover';
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import DataManager from '../utils/DataManager.js';
