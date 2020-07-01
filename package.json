@@ -11,17 +11,22 @@
     "react-cookies": "^0.1.0",
     "react-dom": "^16.8.1",
     "react-router-dom": "^4.3.1",
-    "react-scripts": "2.1.5",
+    "react-scripts": "^3.4.1",
     "react-select": "^2.4.3",
     "string-format": "^2.0.0"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
+    "eslint": "eslint src/",
     "predeploy": "yarn build",
     "deploy": "gh-pages -d build"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm eslint",
+      "pre-push": "npm eslint && npm build"
+    }
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -34,6 +39,7 @@
   ],
   "homepage": "https://connectionaxis.github.io/mvp",
   "devDependencies": {
-    "gh-pages": "^2.2.0"
+    "gh-pages": "^2.2.0",
+    "husky": "^4.2.5"
   }
 }
